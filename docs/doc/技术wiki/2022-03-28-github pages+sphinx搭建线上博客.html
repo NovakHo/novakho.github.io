@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>2022-03-28-github pages+sphinx搭建线上博客 &mdash; Novak V1.0 documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="1.git基本命令" href="2022-04-28-git%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95.html" />
+    <link rel="prev" title="2022-05-06-技术主管视角看世界" href="../%E5%85%B3%E4%BA%8E%E6%88%91/2022-04-29-techmanager-2022.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../index.html" class="icon icon-home"> Novak
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">关于我</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../%E5%85%B3%E4%BA%8E%E6%88%91/2022-04-29-techmanager-2022.html">2022-05-06-技术主管视角看世界</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">技术wiki</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">2022-03-28-github pages+sphinx搭建线上博客</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id1">1.需求分析</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id2">2.最终效果</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id3">3.配置过程</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#python">3.1 换源 装python</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#github">3.2 配置github仓库</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="2022-04-28-git%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95.html">1.git基本命令</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2022-04-28-git%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95.html#id3">分支管理</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2022-04-28-git%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95.html#sshgiteegithub">配置ssh同时支持gitee和github</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2022-04-28-git%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95.html#pullcommit">pull下来再回滚到特定commit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2022-04-28-git%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95.html#zip">关联离线zip到现有项目</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2022-04-28-git%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95.html#authentication-failed-for">报错Authentication failed for</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2022-04-28-git%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95.html#id4">命令大全</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2022-04-28-git%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95.html#id5">常见错误</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2022-04-28-git%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95.html#web">3. 本地预览web界面，本地环境</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2022-04-28-git%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95.html#web-docker">4.本地预览web界面，docker环境</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2022-04-28-scoop-2022.html">scoop 快速安装</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">English_Essay</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../English_Essay/2022-04-26-The-world-is-not-fair.html">The world is not fair</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../English_Essay/2022-04-27-Are-you-too-tired.html">A poem to motivate yourself</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Novak</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>2022-03-28-github pages+sphinx搭建线上博客</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/doc/技术wiki/2022-03-28-github pages+sphinx搭建线上博客.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="github-pages-sphinx">
+<h1>2022-03-28-github pages+sphinx搭建线上博客<a class="headerlink" href="#github-pages-sphinx" title="Permalink to this headline"></a></h1>
+<hr class="docutils" />
+<section id="id1">
+<h2>1.需求分析<a class="headerlink" href="#id1" title="Permalink to this headline"></a></h2>
+</section>
+<section id="id2">
+<h2>2.最终效果<a class="headerlink" href="#id2" title="Permalink to this headline"></a></h2>
+</section>
+<section id="id3">
+<h2>3.配置过程<a class="headerlink" href="#id3" title="Permalink to this headline"></a></h2>
+<hr class="docutils" />
+<section id="python">
+<h3>3.1 换源 装python<a class="headerlink" href="#python" title="Permalink to this headline"></a></h3>
+</section>
+<section id="github">
+<h3>3.2 配置github仓库<a class="headerlink" href="#github" title="Permalink to this headline"></a></h3>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../%E5%85%B3%E4%BA%8E%E6%88%91/2022-04-29-techmanager-2022.html" class="btn btn-neutral float-left" title="2022-05-06-技术主管视角看世界" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="2022-04-28-git%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95.html" class="btn btn-neutral float-right" title="1.git基本命令" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, Novak Ho.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
