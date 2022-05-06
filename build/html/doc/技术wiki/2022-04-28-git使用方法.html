@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>1.git基本命令 &mdash; Novak V1.0 documentation</title>
+  <title>2022-04-28-git使用方法 &mdash; Novak V1.0 documentation</title>
       <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
@@ -18,7 +18,7 @@
     <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="scoop 快速安装" href="2022-04-28-scoop-2022.html" />
+    <link rel="next" title="2022-04-28-scoop快速安装应用" href="2022-04-28-scoop%E5%BF%AB%E9%80%9F%E5%AE%89%E8%A3%85%E5%BA%94%E7%94%A8.html" />
     <link rel="prev" title="2022-03-28-github pages+sphinx搭建线上博客" href="2022-03-28-github%20pages%2Bsphinx%E6%90%AD%E5%BB%BA%E7%BA%BF%E4%B8%8A%E5%8D%9A%E5%AE%A2.html" /> 
 </head>
 
@@ -44,30 +44,37 @@
 <p class="caption" role="heading"><span class="caption-text">技术wiki</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="2022-03-28-github%20pages%2Bsphinx%E6%90%AD%E5%BB%BA%E7%BA%BF%E4%B8%8A%E5%8D%9A%E5%AE%A2.html">2022-03-28-github pages+sphinx搭建线上博客</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">1.git基本命令</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#id1">1.1创建账户与全局配置</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#clone">1.2移动线上文件到特定文件夹-clone</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#id2">1.3 clone他人仓库操作并推送</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">2022-04-28-git使用方法</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id1">1.初次尝试</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id2">1.1创建账户与全局配置</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#clone">1.2移动线上文件到特定文件夹-clone</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id3">1.3 clone他人仓库操作并推送</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id4">分支管理</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#sshgiteegithub">配置ssh同时支持gitee和github</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pullcommit">pull下来再回滚到特定commit</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#zip">关联离线zip到现有项目</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#authentication-failed-for">报错Authentication failed for</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="#id3">分支管理</a></li>
-<li class="toctree-l1"><a class="reference internal" href="#sshgiteegithub">配置ssh同时支持gitee和github</a></li>
-<li class="toctree-l1"><a class="reference internal" href="#pullcommit">pull下来再回滚到特定commit</a></li>
-<li class="toctree-l1"><a class="reference internal" href="#zip">关联离线zip到现有项目</a></li>
-<li class="toctree-l1"><a class="reference internal" href="#authentication-failed-for">报错Authentication failed for</a></li>
-<li class="toctree-l1"><a class="reference internal" href="#id4">命令大全</a></li>
-<li class="toctree-l1"><a class="reference internal" href="#id5">常见错误</a></li>
-<li class="toctree-l1"><a class="reference internal" href="#web">3. 本地预览web界面，本地环境</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#id6">3.1参考链接（失败）</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#rubyjekyll">3.2 安装ruby和jekyll（失败）</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id5">2.命令大全</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id6">常见错误</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="#web-docker">4.本地预览web界面，docker环境</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#docker">4.1安装docker</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#jekyll">3.4下载jekyll镜像并运行本地站点</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#web">3. 本地预览web界面，本地环境</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id7">3.1参考链接（失败）</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rubyjekyll">3.2 安装ruby和jekyll（失败）</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#jekyll">3.4下载jekyll镜像并运行本地站点</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="2022-04-28-scoop-2022.html">scoop 快速安装</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#web-docker">4.本地预览web界面，docker环境</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#docker">4.1安装docker</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="2022-04-28-scoop%E5%BF%AB%E9%80%9F%E5%AE%89%E8%A3%85%E5%BA%94%E7%94%A8.html">2022-04-28-scoop快速安装应用</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2022-05-06-%E7%AE%A1%E7%90%86%E5%B9%B6%E6%9B%B4%E6%96%B0%E7%BA%BF%E4%B8%8A%E5%8D%9A%E5%AE%A2%E7%9A%84%E6%96%B9%E6%B3%95.html">2022-05-06-管理并更新线上博客的方法</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2022-05-06-%E7%AE%A1%E7%90%86%E5%B9%B6%E6%9B%B4%E6%96%B0%E7%BA%BF%E4%B8%8A%E5%8D%9A%E5%AE%A2%E7%9A%84%E6%96%B9%E6%B3%95%20-%20%E5%89%AF%E6%9C%AC.html">2022-05-06-管理并更新线上博客的方法</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">English_Essay</span></p>
 <ul>
@@ -89,7 +96,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
-      <li>1.git基本命令</li>
+      <li>2022-04-28-git使用方法</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../../_sources/doc/技术wiki/2022-04-28-git使用方法.md.txt" rel="nofollow"> View page source</a>
       </li>
@@ -100,10 +107,12 @@
            <div itemprop="articleBody">
              
   <section id="git">
-<h1>1.git基本命令<a class="headerlink" href="#git" title="Permalink to this headline"></a></h1>
+<h1>2022-04-28-git使用方法<a class="headerlink" href="#git" title="Permalink to this headline"></a></h1>
 <hr class="docutils" />
 <section id="id1">
-<h2>1.1创建账户与全局配置<a class="headerlink" href="#id1" title="Permalink to this headline"></a></h2>
+<h2>1.初次尝试<a class="headerlink" href="#id1" title="Permalink to this headline"></a></h2>
+<section id="id2">
+<h3>1.1创建账户与全局配置<a class="headerlink" href="#id2" title="Permalink to this headline"></a></h3>
 <hr class="docutils" />
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#create account</span>
 
@@ -128,7 +137,7 @@
 </div>
 </section>
 <section id="clone">
-<h2>1.2移动线上文件到特定文件夹-clone<a class="headerlink" href="#clone" title="Permalink to this headline"></a></h2>
+<h3>1.2移动线上文件到特定文件夹-clone<a class="headerlink" href="#clone" title="Permalink to this headline"></a></h3>
 <hr class="docutils" />
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#move files to folder</span>
 <span class="c1"># download code</span>
@@ -153,8 +162,8 @@
 </pre></div>
 </div>
 </section>
-<section id="id2">
-<h2>1.3 clone他人仓库操作并推送<a class="headerlink" href="#id2" title="Permalink to this headline"></a></h2>
+<section id="id3">
+<h3>1.3 clone他人仓库操作并推送<a class="headerlink" href="#id3" title="Permalink to this headline"></a></h3>
 <hr class="docutils" />
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">NovakHo</span><span class="o">/</span><span class="n">mzlogin</span><span class="o">.</span><span class="n">github</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">git</span>
 <span class="c1"># do something </span>
@@ -174,9 +183,8 @@
 </pre></div>
 </div>
 </section>
-</section>
-<section id="id3">
-<h1>分支管理<a class="headerlink" href="#id3" title="Permalink to this headline"></a></h1>
+<section id="id4">
+<h3>分支管理<a class="headerlink" href="#id4" title="Permalink to this headline"></a></h3>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#列分支</span>
 <span class="n">git</span> <span class="n">branch</span>
 <span class="c1">#拉分支</span>
@@ -191,7 +199,7 @@
 </div>
 </section>
 <section id="sshgiteegithub">
-<h1>配置ssh同时支持gitee和github<a class="headerlink" href="#sshgiteegithub" title="Permalink to this headline"></a></h1>
+<h3>配置ssh同时支持gitee和github<a class="headerlink" href="#sshgiteegithub" title="Permalink to this headline"></a></h3>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="n">d</span><span class="p">:</span><span class="o">/</span><span class="mi">91</span><span class="n">git</span><span class="o">/</span>
 <span class="n">ssh</span><span class="o">-</span><span class="n">keygen</span> <span class="o">-</span><span class="n">t</span> <span class="n">rsa</span> <span class="o">-</span><span class="n">C</span> <span class="s1">&#39;a249657557@gmail.com&#39;</span> <span class="o">-</span><span class="n">f</span> <span class="o">~/.</span><span class="n">ssh</span><span class="o">/</span><span class="n">id_rsa_gitee</span>
 
@@ -215,7 +223,7 @@
 </div>
 </section>
 <section id="pullcommit">
-<h1>pull下来再回滚到特定commit<a class="headerlink" href="#pullcommit" title="Permalink to this headline"></a></h1>
+<h3>pull下来再回滚到特定commit<a class="headerlink" href="#pullcommit" title="Permalink to this headline"></a></h3>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>git remote -v
 git remote rm origin
 git remote add origin git@github.com:novakho/novakho.github.io.git
@@ -228,7 +236,7 @@ git pull origin master
 </div>
 </section>
 <section id="zip">
-<h1>关联离线zip到现有项目<a class="headerlink" href="#zip" title="Permalink to this headline"></a></h1>
+<h3>关联离线zip到现有项目<a class="headerlink" href="#zip" title="Permalink to this headline"></a></h3>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">unzip</span> <span class="o">&lt;</span><span class="n">repo</span><span class="o">&gt;.</span><span class="n">zip</span>
 <span class="n">cd</span> <span class="o">&lt;</span><span class="n">repo</span><span class="o">&gt;</span>
 <span class="n">git</span> <span class="n">init</span>
@@ -245,7 +253,7 @@ novakho.github.io
 我的gitee</p>
 </section>
 <section id="authentication-failed-for">
-<h1>报错Authentication failed for<a class="headerlink" href="#authentication-failed-for" title="Permalink to this headline"></a></h1>
+<h3>报错Authentication failed for<a class="headerlink" href="#authentication-failed-for" title="Permalink to this headline"></a></h3>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">config</span> <span class="o">--</span><span class="k">global</span> <span class="n">user</span><span class="o">.</span><span class="n">name</span> <span class="p">[</span><span class="n">username</span><span class="p">]</span>
 <span class="n">git</span> <span class="n">config</span> <span class="o">--</span><span class="k">global</span> <span class="n">user</span><span class="o">.</span><span class="n">email</span> <span class="p">[</span><span class="n">email</span><span class="p">]</span>
 <span class="n">git</span> <span class="n">config</span> <span class="o">--</span><span class="nb">list</span>
@@ -253,8 +261,9 @@ novakho.github.io
 </pre></div>
 </div>
 </section>
-<section id="id4">
-<h1>命令大全<a class="headerlink" href="#id4" title="Permalink to this headline"></a></h1>
+</section>
+<section id="id5">
+<h2>2.命令大全<a class="headerlink" href="#id5" title="Permalink to this headline"></a></h2>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>查看、添加、提交、删除、找回，重置修改文件
 git help &lt;command&gt; # 显示command的help
 
@@ -443,23 +452,23 @@ git branch --set-upstream master origin/master
 git branch --set-upstream develop origin/develop
 </pre></div>
 </div>
-</section>
-<section id="id5">
-<h1>常见错误<a class="headerlink" href="#id5" title="Permalink to this headline"></a></h1>
+<section id="id6">
+<h3>常见错误<a class="headerlink" href="#id6" title="Permalink to this headline"></a></h3>
 <ol class="simple">
 <li><p>所在目录并非git目录</p></li>
 <li><p>使用密码进行pull代码，而非token</p></li>
 <li><p>push之前先pull</p></li>
 </ol>
 </section>
+</section>
 <section id="web">
-<h1>3. 本地预览web界面，本地环境<a class="headerlink" href="#web" title="Permalink to this headline"></a></h1>
-<section id="id6">
-<h2>3.1参考链接（失败）<a class="headerlink" href="#id6" title="Permalink to this headline"></a></h2>
+<h2>3. 本地预览web界面，本地环境<a class="headerlink" href="#web" title="Permalink to this headline"></a></h2>
+<section id="id7">
+<h3>3.1参考链接（失败）<a class="headerlink" href="#id7" title="Permalink to this headline"></a></h3>
 <p><a class="reference external" href="https://docs.github.com/cn/pages/setting-up-a-github-pages-site-with-jekyll/testing-your-github-pages-site-locally-with-jekyll">https://docs.github.com/cn/pages/setting-up-a-github-pages-site-with-jekyll/testing-your-github-pages-site-locally-with-jekyll</a></p>
 </section>
 <section id="rubyjekyll">
-<h2>3.2 安装ruby和jekyll（失败）<a class="headerlink" href="#rubyjekyll" title="Permalink to this headline"></a></h2>
+<h3>3.2 安装ruby和jekyll（失败）<a class="headerlink" href="#rubyjekyll" title="Permalink to this headline"></a></h3>
 <p>下载ruby安装包，一路下一步，然后输入1安装MSYS2，然后执行如下命令安装bundler</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">gem</span> <span class="n">install</span> <span class="n">bundler</span>
 <span class="n">jekyll</span> <span class="o">-</span><span class="n">v</span>
@@ -495,40 +504,8 @@ In Gemfile:
 </pre></div>
 </div>
 </section>
-</section>
-<section id="web-docker">
-<h1>4.本地预览web界面，docker环境<a class="headerlink" href="#web-docker" title="Permalink to this headline"></a></h1>
-<section id="docker">
-<h2>4.1安装docker<a class="headerlink" href="#docker" title="Permalink to this headline"></a></h2>
-<p>https://zhuanlan.zhihu.com/p/441965046
-配置docker engine</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
-        <span class="s2">&quot;registry-mirrors&quot;</span><span class="p">:</span> <span class="p">[</span>
-                <span class="s2">&quot;https://x349qt9x.mirror.aliyuncs.com&quot;</span><span class="p">,</span>
-                <span class="s2">&quot;https://docker.mirrors.ustc.edu.cn&quot;</span><span class="p">,</span>
-                <span class="s2">&quot;http://hub-mirror.c.163.com&quot;</span><span class="p">,</span>
-                <span class="s2">&quot;https://registry.docker-cn.com&quot;</span>
-
-        <span class="p">],</span>
-
-        <span class="s2">&quot;builder&quot;</span><span class="p">:</span> <span class="p">{</span>
-                <span class="s2">&quot;gc&quot;</span><span class="p">:</span> <span class="p">{</span>
-                        <span class="s2">&quot;defaultKeepStorage&quot;</span><span class="p">:</span> <span class="s2">&quot;20GB&quot;</span><span class="p">,</span>
-                        <span class="s2">&quot;enabled&quot;</span><span class="p">:</span> <span class="n">true</span>
-                <span class="p">}</span>
-        <span class="p">},</span>
-        <span class="s2">&quot;experimental&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
-        <span class="s2">&quot;features&quot;</span><span class="p">:</span> <span class="p">{</span>
-                <span class="s2">&quot;buildkit&quot;</span><span class="p">:</span> <span class="n">true</span>
-        <span class="p">}</span>
-<span class="p">}</span>
-</pre></div>
-</div>
-<p>wsl配置文件介绍
-<a class="reference external" href="https://docs.microsoft.com/zh-cn/windows/wsl/wsl-config">https://docs.microsoft.com/zh-cn/windows/wsl/wsl-config</a></p>
-</section>
 <section id="jekyll">
-<h2>3.4下载jekyll镜像并运行本地站点<a class="headerlink" href="#jekyll" title="Permalink to this headline"></a></h2>
+<h3>3.4下载jekyll镜像并运行本地站点<a class="headerlink" href="#jekyll" title="Permalink to this headline"></a></h3>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>#打开powershell，运行docker desktop
 d:
 cd .\89dockerimage\
@@ -563,13 +540,46 @@ docker run --restart=always
 </div>
 </section>
 </section>
+<section id="web-docker">
+<h2>4.本地预览web界面，docker环境<a class="headerlink" href="#web-docker" title="Permalink to this headline"></a></h2>
+<section id="docker">
+<h3>4.1安装docker<a class="headerlink" href="#docker" title="Permalink to this headline"></a></h3>
+<p>https://zhuanlan.zhihu.com/p/441965046
+配置docker engine</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+        <span class="s2">&quot;registry-mirrors&quot;</span><span class="p">:</span> <span class="p">[</span>
+                <span class="s2">&quot;https://x349qt9x.mirror.aliyuncs.com&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;https://docker.mirrors.ustc.edu.cn&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;http://hub-mirror.c.163.com&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;https://registry.docker-cn.com&quot;</span>
+
+        <span class="p">],</span>
+
+        <span class="s2">&quot;builder&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">&quot;gc&quot;</span><span class="p">:</span> <span class="p">{</span>
+                        <span class="s2">&quot;defaultKeepStorage&quot;</span><span class="p">:</span> <span class="s2">&quot;20GB&quot;</span><span class="p">,</span>
+                        <span class="s2">&quot;enabled&quot;</span><span class="p">:</span> <span class="n">true</span>
+                <span class="p">}</span>
+        <span class="p">},</span>
+        <span class="s2">&quot;experimental&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+        <span class="s2">&quot;features&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">&quot;buildkit&quot;</span><span class="p">:</span> <span class="n">true</span>
+        <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>wsl配置文件介绍
+<a class="reference external" href="https://docs.microsoft.com/zh-cn/windows/wsl/wsl-config">https://docs.microsoft.com/zh-cn/windows/wsl/wsl-config</a></p>
+</section>
+</section>
+</section>
 
 
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="2022-03-28-github%20pages%2Bsphinx%E6%90%AD%E5%BB%BA%E7%BA%BF%E4%B8%8A%E5%8D%9A%E5%AE%A2.html" class="btn btn-neutral float-left" title="2022-03-28-github pages+sphinx搭建线上博客" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="2022-04-28-scoop-2022.html" class="btn btn-neutral float-right" title="scoop 快速安装" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="2022-04-28-scoop%E5%BF%AB%E9%80%9F%E5%AE%89%E8%A3%85%E5%BA%94%E7%94%A8.html" class="btn btn-neutral float-right" title="2022-04-28-scoop快速安装应用" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

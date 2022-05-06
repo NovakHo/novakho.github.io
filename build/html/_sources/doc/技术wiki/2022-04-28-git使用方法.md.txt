@@ -1,5 +1,6 @@
-## 1.git基本命令
+# 2022-04-28-git使用方法
 ---
+## 1.初次尝试
 ### 1.1创建账户与全局配置
 ---
 ```
@@ -67,7 +68,7 @@ git remote -v
 git push --set-upstream origin master
 
 ```
-## 分支管理
+### 分支管理
 ```
 #列分支
 git branch
@@ -80,7 +81,7 @@ git merge newest
 #删除newest分支，剩下的只有master分支
 git branch -d newtest
 ```
-## 配置ssh同时支持gitee和github
+### 配置ssh同时支持gitee和github
 ```
 cd d:/91git/
 ssh-keygen -t rsa -C 'a249657557@gmail.com' -f ~/.ssh/id_rsa_gitee
@@ -102,7 +103,7 @@ IdentityFile ~/.ssh/id_rsa
 ssh -T git@gitee.com
 ssh -T git@github.com
 ```
-## pull下来再回滚到特定commit
+### pull下来再回滚到特定commit
 ```
 git remote -v
 git remote rm origin
@@ -113,7 +114,7 @@ git pull origin master
 如果提交已经同步到远程仓库，需要使用git push origin -f branch(分支名)
 来将回滚也同步到远程仓库（master 分支谨慎使用 -f）
 ```
-## 关联离线zip到现有项目
+### 关联离线zip到现有项目
 ```
 unzip <repo>.zip
 cd <repo>
@@ -128,14 +129,15 @@ git checkout master
 我的github
 novakho.github.io
 我的gitee
-## 报错Authentication failed for
+
+### 报错Authentication failed for
 ```
 git config --global user.name [username]
 git config --global user.email [email]
 git config --list
 git config --system --unset credential.helper
 ```
-## 命令大全
+## 2.命令大全
 ```
 查看、添加、提交、删除、找回，重置修改文件
 git help <command> # 显示command的help
@@ -324,7 +326,7 @@ git branch --set-upstream master origin/master
 
 git branch --set-upstream develop origin/develop
 ```
-## 常见错误
+### 常见错误
 
 1. 所在目录并非git目录
 1. 使用密码进行pull代码，而非token
@@ -369,34 +371,8 @@ bundle update jekyll
 bundle exec jekyll serve
 参考执行bundle update github-pages
 ```
-## 4.本地预览web界面，docker环境
-### 4.1安装docker
-https://zhuanlan.zhihu.com/p/441965046
-配置docker engine
-```
-{
-        "registry-mirrors": [
-                "https://x349qt9x.mirror.aliyuncs.com",
-                "https://docker.mirrors.ustc.edu.cn",
-                "http://hub-mirror.c.163.com",
-                "https://registry.docker-cn.com"
 
-        ],
 
-        "builder": {
-                "gc": {
-                        "defaultKeepStorage": "20GB",
-                        "enabled": true
-                }
-        },
-        "experimental": false,
-        "features": {
-                "buildkit": true
-        }
-}
-```
-wsl配置文件介绍
-[https://docs.microsoft.com/zh-cn/windows/wsl/wsl-config](https://docs.microsoft.com/zh-cn/windows/wsl/wsl-config)
 ### 3.4下载jekyll镜像并运行本地站点
 ```
 #打开powershell，运行docker desktop
@@ -430,3 +406,32 @@ docker ps -a
 #docker重启，容器也跟着重启
 docker run --restart=always
 ```
+
+## 4.本地预览web界面，docker环境
+### 4.1安装docker
+https://zhuanlan.zhihu.com/p/441965046
+配置docker engine
+```
+{
+        "registry-mirrors": [
+                "https://x349qt9x.mirror.aliyuncs.com",
+                "https://docker.mirrors.ustc.edu.cn",
+                "http://hub-mirror.c.163.com",
+                "https://registry.docker-cn.com"
+
+        ],
+
+        "builder": {
+                "gc": {
+                        "defaultKeepStorage": "20GB",
+                        "enabled": true
+                }
+        },
+        "experimental": false,
+        "features": {
+                "buildkit": true
+        }
+}
+```
+wsl配置文件介绍
+[https://docs.microsoft.com/zh-cn/windows/wsl/wsl-config](https://docs.microsoft.com/zh-cn/windows/wsl/wsl-config)
