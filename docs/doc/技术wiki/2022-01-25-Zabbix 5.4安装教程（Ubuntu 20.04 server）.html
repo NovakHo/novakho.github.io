@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>2022-01-25-Zabbix 5.4安装教程(Ubuntu 20.04 server) &mdash; Novak V1.0 documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="2022-03-05-为知笔记私有化部署懒人脚本" href="2022-03-05-%E4%B8%BA%E7%9F%A5%E7%AC%94%E8%AE%B0%E7%A7%81%E6%9C%89%E5%8C%96%E9%83%A8%E7%BD%B2%E6%87%92%E4%BA%BA%E8%84%9A%E6%9C%AC.html" />
+    <link rel="prev" title="2021-05-03-Centos服务器搭建VNC环境" href="2021-05-03-Centos%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%90%AD%E5%BB%BAVNC%E7%8E%AF%E5%A2%83.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../index.html" class="icon icon-home"> Novak
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">关于我/About me</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../%E5%85%B3%E4%BA%8E%E6%88%91/Novak%20Ho%28Jiahang%20He%29.html"><strong>Novak Ho(Jiahang He)</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../%E5%85%B3%E4%BA%8E%E6%88%91/%E4%BD%95%E4%BD%B3%E6%9D%AD%20Novak%20Ho.html">何佳杭 Novak Ho</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">我的观点</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../%E6%88%91%E7%9A%84%E8%A7%82%E7%82%B9/2022-04-29-techmanager-2022.html">2022-05-06-技术主管视角看世界</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">技术wiki</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="2020-03-02-yum%E6%BA%90%E4%BB%8B%E7%BB%8D%E4%B8%8E%E9%85%8D%E7%BD%AE.html">2020-03-02-yum源介绍与配置</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2021-05-03-Centos%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%90%AD%E5%BB%BAVNC%E7%8E%AF%E5%A2%83.html">2021-05-03-Centos服务器搭建VNC环境</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">2022-01-25-Zabbix 5.4安装教程(Ubuntu 20.04 server)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id1">环境</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id2">步骤</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#zabbix-server-frontend-agent">安装Zabbix server, frontend, agent</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id3">安装配置数据库</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id4">防火墙配置</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#zabbix-server-agent">启动zabbix server agent 进程</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#zabbix-frontend">配置zabbix frontend</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#apache2">重启apache2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id5">前端密码登录</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="2022-03-05-%E4%B8%BA%E7%9F%A5%E7%AC%94%E8%AE%B0%E7%A7%81%E6%9C%89%E5%8C%96%E9%83%A8%E7%BD%B2%E6%87%92%E4%BA%BA%E8%84%9A%E6%9C%AC.html">2022-03-05-为知笔记私有化部署懒人脚本</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2022-03-28-github%20pages%2Bsphinx%E6%90%AD%E5%BB%BA%E7%BA%BF%E4%B8%8A%E5%8D%9A%E5%AE%A2.html">2022-03-28-github pages+sphinx搭建线上博客</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2022-03-28-markdown%E8%AF%AD%E6%B3%95%E8%A7%84%E5%88%99%E6%80%BB%E7%BB%93.html">2022-03-28-markdown语法规则总结</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2022-04-28-git%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95.html">2022-04-28-git使用方法</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2022-04-28-scoop%E5%BF%AB%E9%80%9F%E5%AE%89%E8%A3%85%E5%BA%94%E7%94%A8.html">2022-04-28-scoop快速安装应用</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2022-05-05-Code-FAQ%E6%B1%87%E6%80%BB.html">2022-05-05-Code-FAQ汇总</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2022-05-06-%E4%BD%9C%E4%B8%BA%E4%B8%80%E5%90%8D%E6%9E%81%E5%AE%A2%E6%96%B0%E7%94%B5%E8%84%91%E5%88%B0%E6%89%8B%E5%BA%94%E8%AF%A5%E5%81%9A%E4%BB%80%E4%B9%88.html">2022-05-06作为一名极客新电脑到手应该做什么</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2022-05-06-%E7%AE%A1%E7%90%86%E5%B9%B6%E6%9B%B4%E6%96%B0%E7%BA%BF%E4%B8%8A%E5%8D%9A%E5%AE%A2%E7%9A%84%E6%96%B9%E6%B3%95.html">2022-05-06-管理并更新线上博客的方法</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">English_Essay</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../English_Essay/2022-04-26-The-world-is-not-fair.html">The world is not fair</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../English_Essay/2022-04-27-Are-you-too-tired.html">A poem to motivate yourself</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Novak</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>2022-01-25-Zabbix 5.4安装教程(Ubuntu 20.04 server)</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/doc/技术wiki/2022-01-25-Zabbix 5.4安装教程（Ubuntu 20.04 server）.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="zabbix-5-4-ubuntu-20-04-server">
+<h1>2022-01-25-Zabbix 5.4安装教程(Ubuntu 20.04 server)<a class="headerlink" href="#zabbix-5-4-ubuntu-20-04-server" title="Permalink to this headline"></a></h1>
+<hr class="docutils" />
+<section id="id1">
+<h2>环境<a class="headerlink" href="#id1" title="Permalink to this headline"></a></h2>
+<p>1<a class="reference external" href="https://img-blog.csdnimg.cn/337403aa57aa419caddb2a3f7d2d8cfc.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATm92YWMuaGU=,size_20,color_FFFFFF,t_70,g_se,x_16#pic_center">a1</a></p>
+</section>
+<section id="id2">
+<h2>步骤<a class="headerlink" href="#id2" title="Permalink to this headline"></a></h2>
+<section id="zabbix-server-frontend-agent">
+<h3>安装Zabbix server, frontend, agent<a class="headerlink" href="#zabbix-server-frontend-agent" title="Permalink to this headline"></a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>wget [https://repo.zabbix.com/zabbix/5.4/ubuntu/pool/main/z/zabbix-release/zabbix-release_5.4-1+ubuntu$(lsb_release](https://repo.zabbix.com/zabbix/5.4/ubuntu/pool/main/z/zabbix-release/zabbix-release_5.4-1+ubuntu%24(lsb_release) -rs)_all.deb
+dpkg -i zabbix-release_5.4-1+ubuntu$(lsb_release -rs)_all.deb
+apt update
+apt -y install zabbix-server-mysql zabbix-frontend-php zabbix-apache-conf zabbix-sql-scripts zabbix-agent
+</pre></div>
+</div>
+</section>
+<section id="id3">
+<h3>安装配置数据库<a class="headerlink" href="#id3" title="Permalink to this headline"></a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">apt</span> <span class="o">-</span><span class="n">y</span> <span class="n">install</span> <span class="n">mariadb</span><span class="o">-</span><span class="n">common</span> <span class="n">mariadb</span><span class="o">-</span><span class="n">server</span><span class="o">-</span><span class="mf">10.3</span> <span class="n">mariadb</span><span class="o">-</span><span class="n">client</span><span class="o">-</span><span class="mf">10.3</span>
+
+<span class="n">systemctl</span> <span class="n">start</span> <span class="n">mariadb</span>
+
+<span class="n">systemctl</span> <span class="n">enable</span> <span class="n">mariadb</span>
+</pre></div>
+</div>
+<p>重设数据库密码 下面密码为123456</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>mysql_secure_installation
+
+Enter current password for root (enter for none): Press the Enter
+
+Set root password? [Y/n]: Y
+
+New password: &lt;Enter root DB password&gt; 123456
+
+Re-enter new password: &lt;Repeat root DB password&gt; 123456
+
+Remove anonymous users? [Y/n]: Y
+
+Disallow root login remotely? [Y/n]: Y
+
+Remove test database and access to it? [Y/n]:  Y
+
+Reload privilege tables now? [Y/n]:  Y
+</pre></div>
+</div>
+<p>创建数据库</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mysql</span> <span class="o">-</span><span class="n">uroot</span> <span class="o">-</span><span class="n">p</span><span class="s1">&#39;123456&#39;</span> <span class="o">-</span><span class="n">e</span> <span class="s2">&quot;create database zabbix character set utf8 collate utf8_bin;&quot;</span>
+
+<span class="n">mysql</span> <span class="o">-</span><span class="n">uroot</span> <span class="o">-</span><span class="n">p</span><span class="s1">&#39;123456&#39;</span> <span class="o">-</span><span class="n">e</span> <span class="s2">&quot;grant all privileges on zabbix.* to zabbix@localhost identified by &#39;zabbix&#39;;&quot;</span>
+
+<span class="n">mysql</span> <span class="o">-</span><span class="n">uroot</span> <span class="o">-</span><span class="n">p</span><span class="s1">&#39;123456&#39;</span> <span class="n">zabbix</span> <span class="o">-</span><span class="n">e</span> <span class="s2">&quot;set global innodb_strict_mode=&#39;OFF&#39;;&quot;</span>
+</pre></div>
+</div>
+<p>导入zabbix 数据库</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">zcat</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">share</span><span class="o">/</span><span class="n">doc</span><span class="o">/</span><span class="n">zabbix</span><span class="o">-</span><span class="n">sql</span><span class="o">-</span><span class="n">scripts</span><span class="o">/</span><span class="n">mysql</span><span class="o">/</span><span class="n">create</span><span class="o">.</span><span class="n">sql</span><span class="o">.</span><span class="n">gz</span> <span class="o">|</span> <span class="n">mysql</span> <span class="o">-</span><span class="n">uzabbix</span> <span class="o">-</span><span class="n">p</span><span class="s1">&#39;zabbixDBpass&#39;</span> <span class="n">zabbix</span>
+
+<span class="n">mysql</span> <span class="o">-</span><span class="n">uroot</span> <span class="o">-</span><span class="n">p</span><span class="s1">&#39;123456&#39;</span> <span class="n">zabbix</span> <span class="o">-</span><span class="n">e</span> <span class="s2">&quot;set global innodb_strict_mode=&#39;ON&#39;;&quot;</span>
+</pre></div>
+</div>
+<p>配置zabbix server</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">vi</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">zabbix</span><span class="o">/</span><span class="n">zabbix_server</span><span class="o">.</span><span class="n">conf</span>
+</pre></div>
+</div>
+<p>密码不要加引号
+<img alt="a2" src="https://img-blog.csdnimg.cn/a2d8282a9f954713a526298022cf2944.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATm92YWMuaGU=,size_20,color_FFFFFF,t_70,g_se,x_16#pic_center" /></p>
+</section>
+<section id="id4">
+<h3>防火墙配置<a class="headerlink" href="#id4" title="Permalink to this headline"></a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ufw</span> <span class="n">disable</span>
+</pre></div>
+</div>
+</section>
+<section id="zabbix-server-agent">
+<h3>启动zabbix server agent 进程<a class="headerlink" href="#zabbix-server-agent" title="Permalink to this headline"></a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">systemctl</span> <span class="n">restart</span> <span class="n">zabbix</span><span class="o">-</span><span class="n">server</span> <span class="n">zabbix</span><span class="o">-</span><span class="n">agent</span>
+
+<span class="n">systemctl</span> <span class="n">enable</span> <span class="n">zabbix</span><span class="o">-</span><span class="n">server</span> <span class="n">zabbix</span><span class="o">-</span><span class="n">agent</span>
+</pre></div>
+</div>
+</section>
+<section id="zabbix-frontend">
+<h3>配置zabbix frontend<a class="headerlink" href="#zabbix-frontend" title="Permalink to this headline"></a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">vi</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">zabbix</span><span class="o">/</span><span class="n">apache</span><span class="o">.</span><span class="n">conf</span>
+</pre></div>
+</div>
+<p><img alt="a3" src="https://img-blog.csdnimg.cn/7d85943539a14cc187c71cef84b94d3b.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATm92YWMuaGU=,size_20,color_FFFFFF,t_70,g_se,x_16#pic_center" /></p>
+</section>
+<section id="apache2">
+<h3>重启apache2<a class="headerlink" href="#apache2" title="Permalink to this headline"></a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">systemctl</span> <span class="n">restart</span> <span class="n">apache2</span>
+
+<span class="n">systemctl</span> <span class="n">enable</span> <span class="n">apache2</span>
+</pre></div>
+</div>
+<p>然后打开IP/zabbix/ 登录web 配置 zabbix frontend</p>
+<p><img alt="a4" src="https://img-blog.csdnimg.cn/2e0308b4504f47dc99dc60462a7df5b1.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATm92YWMuaGU=,size_20,color_FFFFFF,t_70,g_se,x_16#pic_center" /></p>
+<p><img alt="a5" src="https://img-blog.csdnimg.cn/229242a829a04ec48bb79c409c26a3ab.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATm92YWMuaGU=,size_20,color_FFFFFF,t_70,g_se,x_16#pic_center" />
+<img alt="a6" src="https://img-blog.csdnimg.cn/7073a22ef76d4ad0aefc30b8e40873ac.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATm92YWMuaGU=,size_20,color_FFFFFF,t_70,g_se,x_16#pic_center" /></p>
+<p><img alt="a7" src="https://img-blog.csdnimg.cn/615068af762a4105b3cea0ee2eab2dce.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATm92YWMuaGU=,size_20,color_FFFFFF,t_70,g_se,x_16#pic_center" />
+<img alt="a8" src="https://img-blog.csdnimg.cn/a2d71a7652ba451e87c06f5672cd4bf9.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATm92YWMuaGU=,size_20,color_FFFFFF,t_70,g_se,x_16#pic_center" />
+<img alt="a9" src="https://img-blog.csdnimg.cn/130105c88f684c0ca4b26fd2ce94743f.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATm92YWMuaGU=,size_20,color_FFFFFF,t_70,g_se,x_16#pic_center" />
+<img alt="a10" src="https://img-blog.csdnimg.cn/35105ec03f2146298da29ee4fee0bd6f.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATm92YWMuaGU=,size_20,color_FFFFFF,t_70,g_se,x_16#pic_center" /></p>
+</section>
+<section id="id5">
+<h3>前端密码登录<a class="headerlink" href="#id5" title="Permalink to this headline"></a></h3>
+<p>Admin / zabbix</p>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="2021-05-03-Centos%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%90%AD%E5%BB%BAVNC%E7%8E%AF%E5%A2%83.html" class="btn btn-neutral float-left" title="2021-05-03-Centos服务器搭建VNC环境" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="2022-03-05-%E4%B8%BA%E7%9F%A5%E7%AC%94%E8%AE%B0%E7%A7%81%E6%9C%89%E5%8C%96%E9%83%A8%E7%BD%B2%E6%87%92%E4%BA%BA%E8%84%9A%E6%9C%AC.html" class="btn btn-neutral float-right" title="2022-03-05-为知笔记私有化部署懒人脚本" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, Novak Ho.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

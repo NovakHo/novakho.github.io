@@ -4,7 +4,7 @@ Created: March 11, 2022 7:59 PM
 
 Male, Born on 1992-08-19, Hangzhou, Married
 
-![200ppi.jpg](https://s2.loli.net/2022/05/07/IrPetgqiOjlYCfm.jpg)
+![ ](https://s2.loli.net/2022/05/07/IrPetgqiOjlYCfm.jpg)
 ---
 
 I'm a product manager based in Hangzhou with 7 years of experience in the security industry. 

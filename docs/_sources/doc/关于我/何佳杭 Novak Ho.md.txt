@@ -4,7 +4,7 @@ Created: April 12, 2022 9:38 PM
 
 男  生于1992-08-19  杭州   已婚
 
-![200ppi.jpg](https://s2.loli.net/2022/05/07/IrPetgqiOjlYCfm.jpg)
+![ ](https://s2.loli.net/2022/05/07/IrPetgqiOjlYCfm.jpg)
 ---
 
 在杭的一名产品经理，7年的安全行业工作经验，长期专注于海外安防市场和网络安全市场。热爱与人接触，热衷学习新的技能，对微观世界充满兴趣。认同热情，擅长与天赋是终身成长必经之路。

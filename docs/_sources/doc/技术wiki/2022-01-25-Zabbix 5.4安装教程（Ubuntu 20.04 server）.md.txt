@@ -1,0 +1,102 @@
+# 2022-01-25-Zabbix 5.4安装教程(Ubuntu 20.04 server)
+
+---
+## 环境
+1[a1](https://img-blog.csdnimg.cn/337403aa57aa419caddb2a3f7d2d8cfc.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATm92YWMuaGU=,size_20,color_FFFFFF,t_70,g_se,x_16#pic_center)
+
+## 步骤
+### 安装Zabbix server, frontend, agent
+```
+wget [https://repo.zabbix.com/zabbix/5.4/ubuntu/pool/main/z/zabbix-release/zabbix-release_5.4-1+ubuntu$(lsb_release](https://repo.zabbix.com/zabbix/5.4/ubuntu/pool/main/z/zabbix-release/zabbix-release_5.4-1+ubuntu%24(lsb_release) -rs)_all.deb
+dpkg -i zabbix-release_5.4-1+ubuntu$(lsb_release -rs)_all.deb
+apt update
+apt -y install zabbix-server-mysql zabbix-frontend-php zabbix-apache-conf zabbix-sql-scripts zabbix-agent
+```
+### 安装配置数据库
+```
+apt -y install mariadb-common mariadb-server-10.3 mariadb-client-10.3
+
+systemctl start mariadb
+
+systemctl enable mariadb
+```
+重设数据库密码 下面密码为123456
+```
+mysql_secure_installation
+
+Enter current password for root (enter for none): Press the Enter
+
+Set root password? [Y/n]: Y
+
+New password: <Enter root DB password> 123456
+
+Re-enter new password: <Repeat root DB password> 123456
+
+Remove anonymous users? [Y/n]: Y
+
+Disallow root login remotely? [Y/n]: Y
+
+Remove test database and access to it? [Y/n]:  Y
+
+Reload privilege tables now? [Y/n]:  Y
+```
+创建数据库
+```
+mysql -uroot -p'123456' -e "create database zabbix character set utf8 collate utf8_bin;"
+
+mysql -uroot -p'123456' -e "grant all privileges on zabbix.* to zabbix@localhost identified by 'zabbix';"
+
+mysql -uroot -p'123456' zabbix -e "set global innodb_strict_mode='OFF';"
+```
+导入zabbix 数据库
+```
+zcat /usr/share/doc/zabbix-sql-scripts/mysql/create.sql.gz | mysql -uzabbix -p'zabbixDBpass' zabbix
+
+mysql -uroot -p'123456' zabbix -e "set global innodb_strict_mode='ON';"
+```
+配置zabbix server
+```
+vi /etc/zabbix/zabbix_server.conf
+```
+密码不要加引号
+![a2](https://img-blog.csdnimg.cn/a2d8282a9f954713a526298022cf2944.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATm92YWMuaGU=,size_20,color_FFFFFF,t_70,g_se,x_16#pic_center)
+
+
+### 防火墙配置
+```
+ufw disable
+```
+
+### 启动zabbix server agent 进程
+```
+systemctl restart zabbix-server zabbix-agent
+
+systemctl enable zabbix-server zabbix-agent
+```
+
+### 配置zabbix frontend
+```
+vi /etc/zabbix/apache.conf
+```
+![a3](https://img-blog.csdnimg.cn/7d85943539a14cc187c71cef84b94d3b.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATm92YWMuaGU=,size_20,color_FFFFFF,t_70,g_se,x_16#pic_center)
+
+### 重启apache2
+```
+systemctl restart apache2
+
+systemctl enable apache2
+```
+然后打开IP/zabbix/ 登录web 配置 zabbix frontend
+
+![a4](https://img-blog.csdnimg.cn/2e0308b4504f47dc99dc60462a7df5b1.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATm92YWMuaGU=,size_20,color_FFFFFF,t_70,g_se,x_16#pic_center)
+
+![a5](https://img-blog.csdnimg.cn/229242a829a04ec48bb79c409c26a3ab.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATm92YWMuaGU=,size_20,color_FFFFFF,t_70,g_se,x_16#pic_center)
+![a6](https://img-blog.csdnimg.cn/7073a22ef76d4ad0aefc30b8e40873ac.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATm92YWMuaGU=,size_20,color_FFFFFF,t_70,g_se,x_16#pic_center)
+
+![a7](https://img-blog.csdnimg.cn/615068af762a4105b3cea0ee2eab2dce.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATm92YWMuaGU=,size_20,color_FFFFFF,t_70,g_se,x_16#pic_center)
+![a8](https://img-blog.csdnimg.cn/a2d71a7652ba451e87c06f5672cd4bf9.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATm92YWMuaGU=,size_20,color_FFFFFF,t_70,g_se,x_16#pic_center)
+![a9](https://img-blog.csdnimg.cn/130105c88f684c0ca4b26fd2ce94743f.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATm92YWMuaGU=,size_20,color_FFFFFF,t_70,g_se,x_16#pic_center)
+![a10](https://img-blog.csdnimg.cn/35105ec03f2146298da29ee4fee0bd6f.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATm92YWMuaGU=,size_20,color_FFFFFF,t_70,g_se,x_16#pic_center)
+
+### 前端密码登录
+Admin / zabbix
