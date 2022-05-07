@@ -3,10 +3,11 @@
 Created: March 11, 2022 7:59 PM
 
 Male, Born on 1992-08-19, Hangzhou, Married
-![MyPhoto.jpg](https://s2.loli.net/2022/05/07/xrvS7hgPiQCBNEU.jpg)
+
+![200ppi.jpg](https://s2.loli.net/2022/05/07/IrPetgqiOjlYCfm.jpg)
 ---
 
-I'm a product manager based in Hangzhou ****with 7 years of experience in the security industry. 
+I'm a product manager based in Hangzhou with 7 years of experience in the security industry. 
 My focus area for the past few years has been CCTV surveillance and access control overseas market, but it turns to privilege access management market in recent two years. I love interacting with people and I am passionate about learning new skills. I think passion, excelling, and talent are the way to grow.
 
 ---
