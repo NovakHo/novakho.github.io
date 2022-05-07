@@ -17,7 +17,7 @@
 
 # -- Project information -----------------------------------------------------
 
-project = 'Novak'
+project = '敬畏天地 终身学习            Go play with what I have'
 copyright = '2022, Novak Ho'
 author = 'Novak Ho'
 

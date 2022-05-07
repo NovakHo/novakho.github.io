@@ -15,7 +15,7 @@ Welcome to Novak's documentation!
 
 .. toctree::
    :maxdepth: 3
-   :caption: 我的观点
+   :caption: 我的观点/My Opinion
    :glob:
 
    doc/我的观点/*
@@ -23,7 +23,7 @@ Welcome to Novak's documentation!
 .. 技术wiki的所有文章
 .. toctree::
    :maxdepth: 3
-   :caption: 技术wiki
+   :caption: 技术Wiki/Tech Wiki
    :glob:
 
    doc/技术wiki/*
@@ -36,12 +36,11 @@ Welcome to Novak's documentation!
 
    doc/English_Essay/*
 
+.. 常用文档的所有文章
+.. toctree::
+   :maxdepth: 3
+   :caption: 常用文档/Fre Docs
+   :glob:
 
+   doc/Fre_Docs/*
 
-
-Indices and tables
-==================
-
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`

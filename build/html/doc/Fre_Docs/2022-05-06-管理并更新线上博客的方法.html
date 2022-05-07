@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>2022-05-06-管理并更新线上博客的方法 &mdash; 敬畏天地 终身学习            Go play with what I have V1.0 documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="prev" title="A poem to motivate yourself" href="../English_Essay/2022-04-27-Are-you-too-tired.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../index.html" class="icon icon-home"> 敬畏天地 终身学习            Go play with what I have
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">关于我/About me</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../%E5%85%B3%E4%BA%8E%E6%88%91/Novak%20Ho%28Jiahang%20He%29.html"><strong>Novak Ho(Jiahang He)</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../%E5%85%B3%E4%BA%8E%E6%88%91/%E4%BD%95%E4%BD%B3%E6%9D%AD%20Novak%20Ho.html">何佳杭 Novak Ho</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">我的观点/My Opinion</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../%E6%88%91%E7%9A%84%E8%A7%82%E7%82%B9/2022-04-29-techmanager-2022.html">2022-05-06-技术主管视角看世界</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">技术Wiki/Tech Wiki</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../%E6%8A%80%E6%9C%AFwiki/2020-03-02-yum%E6%BA%90%E4%BB%8B%E7%BB%8D%E4%B8%8E%E9%85%8D%E7%BD%AE.html">2020-03-02-yum源介绍与配置</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../%E6%8A%80%E6%9C%AFwiki/2021-05-03-Centos%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%90%AD%E5%BB%BAVNC%E7%8E%AF%E5%A2%83.html">2021-05-03-Centos服务器搭建VNC环境</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../%E6%8A%80%E6%9C%AFwiki/2022-01-25-Zabbix%205.4%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B%EF%BC%88Ubuntu%2020.04%20server%EF%BC%89.html">2022-01-25-Zabbix 5.4安装教程(Ubuntu 20.04 server)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../%E6%8A%80%E6%9C%AFwiki/2022-03-05-%E4%B8%BA%E7%9F%A5%E7%AC%94%E8%AE%B0%E7%A7%81%E6%9C%89%E5%8C%96%E9%83%A8%E7%BD%B2%E6%87%92%E4%BA%BA%E8%84%9A%E6%9C%AC.html">2022-03-05-为知笔记私有化部署懒人脚本</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../%E6%8A%80%E6%9C%AFwiki/2022-03-28-github%20pages%2Bsphinx%E6%90%AD%E5%BB%BA%E7%BA%BF%E4%B8%8A%E5%8D%9A%E5%AE%A2.html">2022-03-28-github pages+sphinx搭建线上博客</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../%E6%8A%80%E6%9C%AFwiki/2022-03-28-markdown%E8%AF%AD%E6%B3%95%E8%A7%84%E5%88%99%E6%80%BB%E7%BB%93.html">2022-03-28-markdown语法规则总结</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../%E6%8A%80%E6%9C%AFwiki/2022-04-28-git%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95.html">2022-04-28-git使用方法</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../%E6%8A%80%E6%9C%AFwiki/2022-04-28-scoop%E5%BF%AB%E9%80%9F%E5%AE%89%E8%A3%85%E5%BA%94%E7%94%A8.html">2022-04-28-scoop快速安装应用</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../%E6%8A%80%E6%9C%AFwiki/2022-05-05-Code-FAQ%E6%B1%87%E6%80%BB.html">2022-05-05-Code-FAQ汇总</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../%E6%8A%80%E6%9C%AFwiki/2022-05-06-%E4%BD%9C%E4%B8%BA%E4%B8%80%E5%90%8D%E6%9E%81%E5%AE%A2%E6%96%B0%E7%94%B5%E8%84%91%E5%88%B0%E6%89%8B%E5%BA%94%E8%AF%A5%E5%81%9A%E4%BB%80%E4%B9%88.html">2022-05-06作为一名极客新电脑到手应该做什么</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">English_Essay</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../English_Essay/2022-04-26-The-world-is-not-fair.html">The world is not fair</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../English_Essay/2022-04-27-Are-you-too-tired.html">A poem to motivate yourself</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">常用文档/Fre Docs</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">2022-05-06-管理并更新线上博客的方法</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id2">配置过程</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">敬畏天地 终身学习            Go play with what I have</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>2022-05-06-管理并更新线上博客的方法</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/doc/Fre_Docs/2022-05-06-管理并更新线上博客的方法.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="id1">
+<h1>2022-05-06-管理并更新线上博客的方法<a class="headerlink" href="#id1" title="Permalink to this headline"></a></h1>
+<hr class="docutils" />
+<section id="id2">
+<h2>配置过程<a class="headerlink" href="#id2" title="Permalink to this headline"></a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#1. 手动到如下路径进行编写md文档</span>
+<span class="n">D</span><span class="p">:</span>\<span class="mi">90</span><span class="n">project</span>\<span class="n">docs</span>\<span class="n">source</span>\<span class="n">doc</span>\<span class="n">技术wiki</span>
+
+
+<span class="c1">#2.打开cmd窗口A，制作html并复制到目标文件夹</span>
+<span class="n">d</span><span class="p">:</span> <span class="o">&amp;</span> <span class="n">cd</span> <span class="n">D</span><span class="p">:</span>\<span class="mi">90</span><span class="n">project</span>\<span class="n">docs</span>\
+<span class="n">make</span> <span class="n">clean</span> <span class="o">&amp;</span> <span class="n">make</span> <span class="n">html</span>
+<span class="n">xcopy</span> <span class="n">build</span>\<span class="n">html</span>\<span class="o">*</span> <span class="n">docs</span>\ <span class="o">/</span><span class="n">E</span><span class="o">/</span><span class="n">H</span><span class="o">/</span><span class="n">C</span><span class="o">/</span><span class="n">I</span><span class="o">/</span><span class="n">F</span>
+<span class="n">A</span>
+<span class="n">sphinx</span><span class="o">-</span><span class="n">autobuild</span> <span class="n">source</span> <span class="n">build</span><span class="o">/</span><span class="n">html</span>
+
+
+<span class="c1">#3.查看本地效果，不满意返回步骤1修改</span>
+
+
+<span class="c1">#4.推送文档到github，打开gitbash</span>
+<span class="n">d</span><span class="p">:</span>
+<span class="n">cd</span> <span class="n">D</span><span class="p">:</span>\<span class="mi">90</span><span class="n">project</span>\<span class="n">docs</span>\
+<span class="n">git</span> <span class="n">init</span>
+<span class="n">git</span> <span class="n">add</span> <span class="o">*</span>
+<span class="n">git</span> <span class="n">commit</span> <span class="o">-</span><span class="n">m</span> <span class="s2">&quot;10th&quot;</span>
+<span class="n">git</span> <span class="n">remote</span> <span class="n">rm</span> <span class="n">origin</span>
+<span class="n">git</span> <span class="n">remote</span> <span class="n">add</span> <span class="n">origin</span> <span class="n">git</span><span class="nd">@github</span><span class="o">.</span><span class="n">com</span><span class="p">:</span><span class="n">novakho</span><span class="o">/</span><span class="n">novakho</span><span class="o">.</span><span class="n">github</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">git</span>
+<span class="n">git</span> <span class="n">push</span> <span class="o">--</span><span class="nb">set</span><span class="o">-</span><span class="n">upstream</span> <span class="n">origin</span> <span class="n">master</span>
+
+
+
+</pre></div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../English_Essay/2022-04-27-Are-you-too-tired.html" class="btn btn-neutral float-left" title="A poem to motivate yourself" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, Novak Ho.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -2,7 +2,8 @@
 
 ---
 ## 环境
-1[a1](https://img-blog.csdnimg.cn/337403aa57aa419caddb2a3f7d2d8cfc.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATm92YWMuaGU=,size_20,color_FFFFFF,t_70,g_se,x_16#pic_center)
+
+![a1](https://img-blog.csdnimg.cn/337403aa57aa419caddb2a3f7d2d8cfc.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATm92YWMuaGU=,size_20,color_FFFFFF,t_70,g_se,x_16#pic_center)
 
 ## 步骤
 ### 安装Zabbix server, frontend, agent

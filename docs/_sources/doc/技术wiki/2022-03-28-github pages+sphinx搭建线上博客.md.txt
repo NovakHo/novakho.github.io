@@ -11,6 +11,7 @@
 ## 2.最终效果
 ---
 https://novakhogithubio.rtfd.io
+使用了sphinx_rtd_theme主题
 
 ## 3.思路及我踩过的坑
 ---
@@ -52,5 +53,6 @@ make && make install
 
 
 
-## 5.注意事项
+## 5.参考链接
 ---
+https://zhuanlan.zhihu.com/p/264647009
