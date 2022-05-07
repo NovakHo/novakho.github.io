@@ -8,11 +8,17 @@ Welcome to Novak's documentation!
 
 .. toctree::
    :maxdepth: 3
-   :caption: 关于我
+   :caption: 关于我/About me
    :glob:
 
-
    doc/关于我/*
+
+.. toctree::
+   :maxdepth: 3
+   :caption: 我的观点
+   :glob:
+
+   doc/我的观点/*
 
 .. 技术wiki的所有文章
 .. toctree::

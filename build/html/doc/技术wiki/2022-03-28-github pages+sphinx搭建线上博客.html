@@ -18,8 +18,8 @@
     <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="2022-04-28-git使用方法" href="2022-04-28-git%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95.html" />
-    <link rel="prev" title="2022-05-06-技术主管视角看世界" href="../%E5%85%B3%E4%BA%8E%E6%88%91/2022-04-29-techmanager-2022.html" /> 
+    <link rel="next" title="2022-03-28-markdown语法规则总结" href="2022-03-28-markdown%E8%AF%AD%E6%B3%95%E8%A7%84%E5%88%99%E6%80%BB%E7%BB%93.html" />
+    <link rel="prev" title="2022-03-05-为知笔记私有化部署懒人脚本" href="2022-03-05-%E4%B8%BA%E7%9F%A5%E7%AC%94%E8%AE%B0%E7%A7%81%E6%9C%89%E5%8C%96%E9%83%A8%E7%BD%B2%E6%87%92%E4%BA%BA%E8%84%9A%E6%9C%AC.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -37,26 +37,38 @@
   </form>
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <p class="caption" role="heading"><span class="caption-text">关于我</span></p>
+              <p class="caption" role="heading"><span class="caption-text">关于我/About me</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../%E5%85%B3%E4%BA%8E%E6%88%91/2022-04-29-techmanager-2022.html">2022-05-06-技术主管视角看世界</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../%E5%85%B3%E4%BA%8E%E6%88%91/Untitled%207ff75652d41b455bb87d95f6e47fe6a2.html"><strong>Novak Ho(Jiahang He)</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../%E5%85%B3%E4%BA%8E%E6%88%91/%E4%BD%95%E4%BD%B3%E6%9D%AD%20Novak%20Ho%20ccd9cec4d0024bbfaed1953e32acbeae.html">何佳杭 Novak Ho</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">我的观点</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../%E6%88%91%E7%9A%84%E8%A7%82%E7%82%B9/2022-04-29-techmanager-2022.html">2022-05-06-技术主管视角看世界</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">技术wiki</span></p>
 <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="2020-03-02-yum%E6%BA%90%E4%BB%8B%E7%BB%8D%E4%B8%8E%E9%85%8D%E7%BD%AE.html">2020-03-02-yum源介绍与配置</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2022-03-05-%E4%B8%BA%E7%9F%A5%E7%AC%94%E8%AE%B0%E7%A7%81%E6%9C%89%E5%8C%96%E9%83%A8%E7%BD%B2%E6%87%92%E4%BA%BA%E8%84%9A%E6%9C%AC.html">2022-03-05-为知笔记私有化部署懒人脚本</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">2022-03-28-github pages+sphinx搭建线上博客</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#id1">1.需求分析</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#id2">2.最终效果</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#id3">3.配置过程</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#python">3.1 换源 装python</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#github">3.2 配置github仓库</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id3">3.思路及我踩过的坑</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id4">4.配置过程</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#python">4.1 换源 装python</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#github">4.2 配置github仓库</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#read-the-docs">4.3 配置Read the docs</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="#id5">5.注意事项</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="2022-03-28-markdown%E8%AF%AD%E6%B3%95%E8%A7%84%E5%88%99%E6%80%BB%E7%BB%93.html">2022-03-28-markdown语法规则总结</a></li>
 <li class="toctree-l1"><a class="reference internal" href="2022-04-28-git%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95.html">2022-04-28-git使用方法</a></li>
 <li class="toctree-l1"><a class="reference internal" href="2022-04-28-scoop%E5%BF%AB%E9%80%9F%E5%AE%89%E8%A3%85%E5%BA%94%E7%94%A8.html">2022-04-28-scoop快速安装应用</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2022-05-05-Code-FAQ%E6%B1%87%E6%80%BB.html">2022-05-05-Code-FAQ汇总</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2022-05-06-%E4%BD%9C%E4%B8%BA%E4%B8%80%E5%90%8D%E6%9E%81%E5%AE%A2%E6%96%B0%E7%94%B5%E8%84%91%E5%88%B0%E6%89%8B%E5%BA%94%E8%AF%A5%E5%81%9A%E4%BB%80%E4%B9%88.html">2022-05-06作为一名极客新电脑到手应该做什么</a></li>
 <li class="toctree-l1"><a class="reference internal" href="2022-05-06-%E7%AE%A1%E7%90%86%E5%B9%B6%E6%9B%B4%E6%96%B0%E7%BA%BF%E4%B8%8A%E5%8D%9A%E5%AE%A2%E7%9A%84%E6%96%B9%E6%B3%95.html">2022-05-06-管理并更新线上博客的方法</a></li>
-<li class="toctree-l1"><a class="reference internal" href="2022-05-06-%E7%AE%A1%E7%90%86%E5%B9%B6%E6%9B%B4%E6%96%B0%E7%BA%BF%E4%B8%8A%E5%8D%9A%E5%AE%A2%E7%9A%84%E6%96%B9%E6%B3%95%20-%20%E5%89%AF%E6%9C%AC.html">2022-05-06-管理并更新线上博客的方法</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">English_Essay</span></p>
 <ul>
@@ -93,19 +105,67 @@
 <hr class="docutils" />
 <section id="id1">
 <h2>1.需求分析<a class="headerlink" href="#id1" title="Permalink to this headline"></a></h2>
+<hr class="docutils" />
+<p>搭建一个线上网页，分享非涉密内容，输出个人价值，帮助同路人。</p>
+<ul class="simple">
+<li><p>线上网站面向中英文读者</p></li>
+<li><p>线上网页应该包含至少四到五个栏目，包含中英文界面</p></li>
+<li><p>具有搜索功能</p></li>
+<li><p>高度自定义</p></li>
+</ul>
 </section>
 <section id="id2">
 <h2>2.最终效果<a class="headerlink" href="#id2" title="Permalink to this headline"></a></h2>
+<hr class="docutils" />
+<p>https://novakhogithubio.rtfd.io</p>
 </section>
 <section id="id3">
-<h2>3.配置过程<a class="headerlink" href="#id3" title="Permalink to this headline"></a></h2>
+<h2>3.思路及我踩过的坑<a class="headerlink" href="#id3" title="Permalink to this headline"></a></h2>
+<hr class="docutils" />
+<ul class="simple">
+<li><p>尝试过jekyll + github pages方案，但是模板不满足四五个栏目，自行修改难度大</p></li>
+<li><p>尝试过直接clone别人的项目，然后修改，报错多，作者本人给不出具体的原因</p></li>
+<li><p>于是，就有了这个sphinx + github pages + Read the docs方案，优点是高度自定义，本地可预览</p></li>
+</ul>
+</section>
+<section id="id4">
+<h2>4.配置过程<a class="headerlink" href="#id4" title="Permalink to this headline"></a></h2>
 <hr class="docutils" />
 <section id="python">
-<h3>3.1 换源 装python<a class="headerlink" href="#python" title="Permalink to this headline"></a></h3>
+<h3>4.1 换源 装python<a class="headerlink" href="#python" title="Permalink to this headline"></a></h3>
+<hr class="docutils" />
+<ul class="simple">
+<li><p>Linux/Unix系统
+需要换源，对此不清楚的小伙伴参考<em>2020-03-02-yum源介绍与配置</em>
+再使用wget下载并编译，安装gcc</p></li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>wget https://www.python.org/ftp/python/3.8.2/Python-3.8.2.tar.xz
+yum install tar -y
+xz -d Python-3.8.2.tar.xz
+tar xf Python-3.8.2.tar 
+./configure --prefix<span class="o">=</span>/usr/local/python3.8.2
+yum install gcc -y
+make <span class="o">&amp;&amp;</span> make install
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Windows系统
+则直接到python官网下载安装(检查环境变量是否生效)即可
+备注：本人由于做过很多小软件，需要不同的虚拟环境，则使用了anaconda创建虚拟环境，再进行安装相关组件。</p></li>
+</ul>
 </section>
 <section id="github">
-<h3>3.2 配置github仓库<a class="headerlink" href="#github" title="Permalink to this headline"></a></h3>
+<h3>4.2 配置github仓库<a class="headerlink" href="#github" title="Permalink to this headline"></a></h3>
 </section>
+<hr class="docutils" />
+<section id="read-the-docs">
+<h3>4.3 配置Read the docs<a class="headerlink" href="#read-the-docs" title="Permalink to this headline"></a></h3>
+</section>
+</section>
+<hr class="docutils" />
+<section id="id5">
+<h2>5.注意事项<a class="headerlink" href="#id5" title="Permalink to this headline"></a></h2>
+<hr class="docutils" />
 </section>
 </section>
 
@@ -113,8 +173,8 @@
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="../%E5%85%B3%E4%BA%8E%E6%88%91/2022-04-29-techmanager-2022.html" class="btn btn-neutral float-left" title="2022-05-06-技术主管视角看世界" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="2022-04-28-git%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95.html" class="btn btn-neutral float-right" title="2022-04-28-git使用方法" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="2022-03-05-%E4%B8%BA%E7%9F%A5%E7%AC%94%E8%AE%B0%E7%A7%81%E6%9C%89%E5%8C%96%E9%83%A8%E7%BD%B2%E6%87%92%E4%BA%BA%E8%84%9A%E6%9C%AC.html" class="btn btn-neutral float-left" title="2022-03-05-为知笔记私有化部署懒人脚本" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="2022-03-28-markdown%E8%AF%AD%E6%B3%95%E8%A7%84%E5%88%99%E6%80%BB%E7%BB%93.html" class="btn btn-neutral float-right" title="2022-03-28-markdown语法规则总结" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

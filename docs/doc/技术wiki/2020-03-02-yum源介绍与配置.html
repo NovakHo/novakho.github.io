@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>2020-03-02-yum源介绍与配置 &mdash; Novak V1.0 documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="2022-03-05-为知笔记私有化部署懒人脚本" href="2022-03-05-%E4%B8%BA%E7%9F%A5%E7%AC%94%E8%AE%B0%E7%A7%81%E6%9C%89%E5%8C%96%E9%83%A8%E7%BD%B2%E6%87%92%E4%BA%BA%E8%84%9A%E6%9C%AC.html" />
+    <link rel="prev" title="2022-05-06-技术主管视角看世界" href="../%E6%88%91%E7%9A%84%E8%A7%82%E7%82%B9/2022-04-29-techmanager-2022.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../index.html" class="icon icon-home"> Novak
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">关于我/About me</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../%E5%85%B3%E4%BA%8E%E6%88%91/Untitled%207ff75652d41b455bb87d95f6e47fe6a2.html"><strong>Novak Ho(Jiahang He)</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../%E5%85%B3%E4%BA%8E%E6%88%91/%E4%BD%95%E4%BD%B3%E6%9D%AD%20Novak%20Ho%20ccd9cec4d0024bbfaed1953e32acbeae.html">何佳杭 Novak Ho</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">我的观点</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../%E6%88%91%E7%9A%84%E8%A7%82%E7%82%B9/2022-04-29-techmanager-2022.html">2022-05-06-技术主管视角看世界</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">技术wiki</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">2020-03-02-yum源介绍与配置</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id1">1.yum源介绍</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#yum-centos7">2.yum源配置-对Centos7 精简版系统来说</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id2">方法一(最常见)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#isoyum">方法二(最懒人)使用本地ISO作为yum源</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#yum-centos8">3.yum源配置-对Centos8系统来说</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="2022-03-05-%E4%B8%BA%E7%9F%A5%E7%AC%94%E8%AE%B0%E7%A7%81%E6%9C%89%E5%8C%96%E9%83%A8%E7%BD%B2%E6%87%92%E4%BA%BA%E8%84%9A%E6%9C%AC.html">2022-03-05-为知笔记私有化部署懒人脚本</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2022-03-28-github%20pages%2Bsphinx%E6%90%AD%E5%BB%BA%E7%BA%BF%E4%B8%8A%E5%8D%9A%E5%AE%A2.html">2022-03-28-github pages+sphinx搭建线上博客</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2022-03-28-markdown%E8%AF%AD%E6%B3%95%E8%A7%84%E5%88%99%E6%80%BB%E7%BB%93.html">2022-03-28-markdown语法规则总结</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2022-04-28-git%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95.html">2022-04-28-git使用方法</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2022-04-28-scoop%E5%BF%AB%E9%80%9F%E5%AE%89%E8%A3%85%E5%BA%94%E7%94%A8.html">2022-04-28-scoop快速安装应用</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2022-05-05-Code-FAQ%E6%B1%87%E6%80%BB.html">2022-05-05-Code-FAQ汇总</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2022-05-06-%E4%BD%9C%E4%B8%BA%E4%B8%80%E5%90%8D%E6%9E%81%E5%AE%A2%E6%96%B0%E7%94%B5%E8%84%91%E5%88%B0%E6%89%8B%E5%BA%94%E8%AF%A5%E5%81%9A%E4%BB%80%E4%B9%88.html">2022-05-06作为一名极客新电脑到手应该做什么</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2022-05-06-%E7%AE%A1%E7%90%86%E5%B9%B6%E6%9B%B4%E6%96%B0%E7%BA%BF%E4%B8%8A%E5%8D%9A%E5%AE%A2%E7%9A%84%E6%96%B9%E6%B3%95.html">2022-05-06-管理并更新线上博客的方法</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">English_Essay</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../English_Essay/2022-04-26-The-world-is-not-fair.html">The world is not fair</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../English_Essay/2022-04-27-Are-you-too-tired.html">A poem to motivate yourself</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Novak</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>2020-03-02-yum源介绍与配置</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/doc/技术wiki/2020-03-02-yum源介绍与配置.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="yum">
+<h1>2020-03-02-yum源介绍与配置<a class="headerlink" href="#yum" title="Permalink to this headline"></a></h1>
+<hr class="docutils" />
+<section id="id1">
+<h2>1.yum源介绍<a class="headerlink" href="#id1" title="Permalink to this headline"></a></h2>
+<hr class="docutils" />
+<p>1、yum是什么，yum源又是什么</p>
+<p>在windows上安装一个软件，我们可以通过360管家。因为360管家提供了软件的安装，卸载，并且解决了软件之间的依赖等相关问题，使得我们能够一键安装。在linux上有一个提供了和360管家类似功能的工具，叫做yum。使用yum我们就可以做到一个命令安装软件，并且不同的发行linux有不同工具，例如红帽（read hat）linux就使用的rpm全称就是read hat package manager 红帽软件包管理工具。</p>
+<p>yum源是什么呢？我们安装软件的时候需要下载软件，将很多软件放在一起就是源。软件安装包的来源。所以yum源就是软件安装包来源。如果我们是在线的，他会在网上给你下载安装包，如果是离线的没有网络。那么就只能配置本地的yum源了。</p>
+<p>2、本地yum源是什么呢？</p>
+<p>上面说过yum源就是软件安装包的来源，但是这些安装包哪里有呢？其实在linux的安装镜像中就有的，linux已经将常见的安装包放到了linux镜像中。如果你使用压缩文件打开linux的iso镜像文件，你会发现在根目录下有个文件夹：packages</p>
+<p><img alt="https://bbs.dbappsecurity.com.cn/oss/image/3b523b66529f77dcccd1b7d542f194aa.png" src="https://bbs.dbappsecurity.com.cn/oss/image/3b523b66529f77dcccd1b7d542f194aa.png" /></p>
+<p>上图就是使用压缩软件打开的系统盘内部情况，比如我们常用的工具vim，就是在这里面的。所以说：系统的安装镜像就可以当作yum源。</p>
+<p>3、与yum源相关的配置文件</p>
+<p><img alt="https://bbs.dbappsecurity.com.cn/oss/image/f58a4b1ebe3196797d1f55fab0f5c74e.png" src="https://bbs.dbappsecurity.com.cn/oss/image/f58a4b1ebe3196797d1f55fab0f5c74e.png" /></p>
+<p>上图就是yun源相关的配置，在路径/etc/yum.repos.d/目录下，一共4个文件，说下两个常用的。</p>
+<p>CentOS-Base.repo：有网的环境下默认使用这个，这个是第一优先级。因为没网，所以修改文件名，设置成备份文件。这样系统就会使用第二优先级的文件。</p>
+<p>CentOS-Media.repo：没网的环境下使用这个，在上图中会发现他默认配置了4个路径，第4个yumsource是我自己加的。意思是说，如果系统检测yum使用了离线安装，那么会从上到下从这4个路径中查找安装软件。所以我们只要把光盘挂载在这四个目录下的任意一个目录即可。同时，该配置文件默认是不启用的，如果想使用需要修改倒数第二行的enabled为1，否则该文件无效。</p>
+</section>
+<section id="yum-centos7">
+<h2>2.yum源配置-对Centos7 精简版系统来说<a class="headerlink" href="#yum-centos7" title="Permalink to this headline"></a></h2>
+<hr class="docutils" />
+<section id="id2">
+<h3>方法一(最常见)<a class="headerlink" href="#id2" title="Permalink to this headline"></a></h3>
+<hr class="docutils" />
+<p><em>在这里找wget的rpm包</em></p>
+<p><a class="reference external" href="http://mirrors.163.com/centos/7/os/x86_64/Packages/">http://mirrors.163.com/centos/7/os/x86_64/Packages/</a></p>
+<p>然后使用curl -O http下载或者下载后再winscp上传</p>
+<div class="highlight-jsx notranslate"><div class="highlight"><pre><span></span>curl -O http://mirrors.163.com/centos/7/os/x86_64/Packages/wget-1.14-18.el7_6.1.x86_64.rpm
+</pre></div>
+</div>
+<p><em>RPM 包安装</em></p>
+<p>安装 RPM 的命令格式为：</p>
+<p>[root&#64;localhost ~]# rpm -ivh 包全名</p>
+<p>注意一定是包全名。涉及到包全名的命令，一定要注意路径，可能软件包在光盘中，因此需提前做好设备的挂载工作。</p>
+<p>此命令中各选项参数的含义为：</p>
+<ul class="simple">
+<li><p>i：安装（install）;</p></li>
+<li><p>v：显示更详细的信息（verbose）;</p></li>
+<li><p>h：打印 #，显示安装进度（hash）;</p></li>
+</ul>
+<p><em>使用wget拉centos7的yum源</em></p>
+<div class="highlight-BASH notranslate"><div class="highlight"><pre><span></span><span class="c1">#换centos7 repo方法</span>
+<span class="c1">#注意下文中repo的名称需要进行替换，不一定是dvd.repo</span>
+<span class="c1">#注意这个curl后面的url也并非不变的，需要用的时候到浏览器中查看下链接是否还存在，不存在就到上一级目录查找类似的rpm包</span>
+cat /etc/centos-release
+curl -O http://mirrors.163.com/centos/7/os/x86_64/Packages/wget-1.14-18.el7_6.1.x86_64.rpm
+
+ls
+rpm -ivh wget-1.14-18.el7_6.1.x86_64.rpm
+
+mv /etc/yum.repos.d/dvd.repo /etc/yum.repos.d/dvd.repo.backup
+wget -O /etc/yum.repos.d/dvd.repo https://mirrors.aliyun.com/repo/Centos-7.repo
+yum makecache
+cat /etc/yum.repos.d/dvd.repo
+</pre></div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="isoyum">
+<h3>方法二(最懒人)使用本地ISO作为yum源<a class="headerlink" href="#isoyum" title="Permalink to this headline"></a></h3>
+<hr class="docutils" />
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1">#传iso镜像到tmp目录下,local为挂载点</span>
+mkdir /tmp/local
+<span class="nb">cd</span> /tmp/
+<span class="c1">#CentOS-7-x86_64-Everything-2009.iso为实际上传的ISO名称</span>
+mount -o loop CentOS-7-x86_64-Everything-2009.iso /tmp/local/
+df -Th
+
+mkdir /etc/yum.repos.d/history
+mv /etc/yum.repos.d/* -t /etc/yum.repos.d/history
+vi /etc/yum.repos.d/local.repo
+
+<span class="c1">#修改成如下内容</span>
+<span class="o">[</span>local<span class="o">]</span>
+<span class="nv">name</span><span class="o">=</span><span class="nb">local</span>
+<span class="c1"># baseurl就是挂载路径</span>
+<span class="nv">baseurl</span><span class="o">=</span>file:///tmp/local
+<span class="c1"># enabled的值为1表示启用该yum源</span>
+<span class="nv">enabled</span><span class="o">=</span><span class="m">1</span>
+<span class="c1">#本地挂载不涉及数字签名问题，将gpgcheck值设置为0，表示不检查数字签名</span>
+<span class="nv">gpgcheck</span><span class="o">=</span><span class="m">0</span>
+<span class="c1"># gpgkey的值可以进到挂载路径下进行查看，我这里看到的是RPM-GPG-KEY-CentOS-7。</span>
+<span class="nv">gpgkey</span><span class="o">=</span>file:///tmp/local/RPM-GPG-KEY-CentOS-7
+
+yum clean all
+yum makecache
+yum install -y ntp vim
+</pre></div>
+</div>
+</section>
+</section>
+<section id="yum-centos8">
+<h2>3.yum源配置-对Centos8系统来说<a class="headerlink" href="#yum-centos8" title="Permalink to this headline"></a></h2>
+<hr class="docutils" />
+<p>参考以上两个方法，把里面的iso与rpm包下载路径都改为centos8的即可。</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../%E6%88%91%E7%9A%84%E8%A7%82%E7%82%B9/2022-04-29-techmanager-2022.html" class="btn btn-neutral float-left" title="2022-05-06-技术主管视角看世界" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="2022-03-05-%E4%B8%BA%E7%9F%A5%E7%AC%94%E8%AE%B0%E7%A7%81%E6%9C%89%E5%8C%96%E9%83%A8%E7%BD%B2%E6%87%92%E4%BA%BA%E8%84%9A%E6%9C%AC.html" class="btn btn-neutral float-right" title="2022-03-05-为知笔记私有化部署懒人脚本" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, Novak Ho.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

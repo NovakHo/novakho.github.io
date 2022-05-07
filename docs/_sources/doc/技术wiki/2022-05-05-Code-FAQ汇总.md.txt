@@ -1,0 +1,680 @@
+# 2022-05-05-Code-FAQ汇总
+
+## 2. 我的问题 批量修改word中所有图片宽度
+
+- [x] 如何批量修改word中所有图片宽度-->目前能做到直接修改宽度到16cm，但是如何先缩放直到16cm宽度呢？
+```
+Sub setpicsize() '设置图片大小
+Dim n ' 图片个数
+On Error Resume Next ' 忽略错误
+For n = 1 To ActiveDocument.InlineShapes.Count 'InlineShapes 类型图片
+ActiveDocument.InlineShapes(n).Width = 500 '设置图片宽度 300px
+Next n
+For n = 1 To ActiveDocument.Shapes.Count 'Shapes 类型图片
+
+ActiveDocument.Shapes(n).Width = 500 '设置图片宽度 300px
+Next n
+End Sub
+
+```
+```
+Sub resetImgSize()
+Dim iShape As InlineShape
+For Each iShape In ActiveDocument.InlineShapes
+iShape.LockAspectRatio = msoTrue
+'iShape.Height = CentimetersToPoints(3.5)
+iShape.Width = CentimetersToPoints(16)
+Next
+End Sub
+```
+```
+Sub resetImgSize()
+Dim iShape As InlineShape
+For Each iShape In ActiveDocument.InlineShapes
+iShape.LockAspectRatio = msoTrue
+
+iShape.Width = CentimetersToPoints(15.9)
+Next
+End Sub
+
+```
+```
+https://jingyan.baidu.com/article/6d704a134a084f28db51cac1.html
+```
+```
+'第二种方法，经测试，对整篇文档图片有效
+    Dim Shap As InlineShape
+    For Each Shap In ActiveDocument.InlineShapes
+        If Shap.Type = wdInlineShapePicture Then
+            'Shap.LockAspectRatio = msoFalse '不锁定纵横比
+            'MsgBox "图片宽度" & Shap.Width'测试，提示图片大小以便判断单位
+            
+            If Shap.Width > 485 Then '此处单位是像素；如果图片超出边界才进行处理，否则图片放大看起来不好看。
+                'Word中的尺寸单位默认是cm（厘米），而1cm等于28.35px（像素），由于代码中换算设置的单位是px（像素）。所以就用尺寸高度或宽度值乘像素值。即为：7*28.35=198.45；宽度换算方法与此相同。
+                Shap.Width = CentimetersToPoints(17) '此处单位是厘米。如果Word设置页边距为适中，则中间内容宽17.08CM
+                'Shap.Height = CentimetersToPoints(7) '高度不设置，默认锁定纵横比
+            End If
+            
+            '设置图片居中
+            Shap.Range.Select
+            Selection.ClearFormatting '如果Word中图片设置了行距不是1，比如固定值30磅，则无论图片设置什么格式，嵌入式会造成只显示一部分图片。
+            Selection.Range.Paragraphs.Alignment = wdAlignParagraphCenter
+
+        End If
+
+    Next
+
+End Sub
+```
+```
+数据可视化pandas mplfinance
+```
+
+- [x] 快速定位到所有超出边距的图片或者表格-->上问题解决
+- [x] 如何轻松管理字体类型
+
+[https://zhuanlan.zhihu.com/p/441075535](https://zhuanlan.zhihu.com/p/441075535)
+[https://zhuanlan.zhihu.com/p/32090112](https://zhuanlan.zhihu.com/p/32090112)
+
+- [x] 如何调整各个层级的格式，行间距，段前段后-->见上一条
+- [x] 所有尖括号内的字都加粗
+
+![4417402351_56153991612_A93D940A-1C46-4880-97ED-0C6196530E71.png](https://cdn.nlark.com/yuque/0/2022/png/27194526/1649289746529-b33c5ea8-4afd-4944-a661-587fb1f579ea.png#clientId=u06ff4c4d-7110-4&crop=0&crop=0&crop=1&crop=1&from=paste&height=750&id=ue96fe790&margin=%5Bobject%20Object%5D&name=4417402351_56153991612_A93D940A-1C46-4880-97ED-0C6196530E71.png&originHeight=750&originWidth=1172&originalType=binary&ratio=1&rotation=0&showTitle=false&size=45140&status=done&style=none&taskId=ue3e5c483-aff0-4371-ab59-eba8deac0d2&title=&width=1172)
+
+- [x] 检查是否所有的operation大小写正确
+- [x] 字母挤在一起 ，81页  97页
+
+[https://jingyan.baidu.com/article/f3ad7d0f58d0b609c3345b9a.html](https://jingyan.baidu.com/article/f3ad7d0f58d0b609c3345b9a.html)
+
+- [x] 生成所有IP list
+- [x] 学习git命令
+
+未来可删除资料：C:\Users\muji\AppData\Roaming\Typora\typora-user-images\
+#CMD管理员执行
+scoop update && scoop update * && conda update conda
+
+- [x] 如何wget+python传文件到docker层
+
+可将本地直接传docker内部，参考这个链接[https://www.cnblogs.com/sx66/p/11887022.html](https://www.cnblogs.com/sx66/p/11887022.html)
+
+- [x] 如何curl
+
+![image.png](https://cdn.nlark.com/yuque/0/2022/png/27194526/1649923477907-9217a51c-1cba-446a-b626-0a44a1884148.png#clientId=ua20c447f-def9-4&crop=0&crop=0&crop=1&crop=1&from=paste&height=299&id=ueacbd630&margin=%5Bobject%20Object%5D&name=image.png&originHeight=299&originWidth=931&originalType=binary&ratio=1&rotation=0&showTitle=false&size=49286&status=done&style=none&taskId=u1b8b46d6-190b-4cc6-96f3-09454f6fbfe&title=&width=931)
+
+- [x] 如何批量转换文字为数字
+
+参考[https://zhuanlan.zhihu.com/p/350333481](https://zhuanlan.zhihu.com/p/350333481)
+## 3. 公网账号密码
+![4641495474_56260296799_DD169274-CACA-47b3-A253-1AB1E77D4E90.png](https://cdn.nlark.com/yuque/0/2022/png/27194526/1649382540993-e86de6b5-d675-4c91-bd07-c3c4e27a714c.png#clientId=ud35596a3-3252-4&crop=0&crop=0&crop=1&crop=1&from=paste&height=332&id=u1a14f1ef&margin=%5Bobject%20Object%5D&name=4641495474_56260296799_DD169274-CACA-47b3-A253-1AB1E77D4E90.png&originHeight=332&originWidth=924&originalType=binary&ratio=1&rotation=0&showTitle=false&size=15162&status=done&style=none&taskId=uaf773391-eea6-42fd-a0bc-33eddbeb2bd&title=&width=924)
+dbeaver配合oracle用不了
+
+
+## 4. invisible women
+Data is fundamental to the modern world. From economic development, to healthcare, to education and public policy, we rely on numbers to allocate resources and make crucial decisions. But because so much data fails to take into account gender, because it treats men as the default and women as atypical, bias and discrimination are baked into our systems. And women pay tremendous costs for this bias, in time, money, and often with their lives. Celebrated feminist advocate Caroline Criado Perez investigates the shocking root cause of gender inequality and research in Invisible Women--diving into women's lives at home, the workplace, the public square, the doctor's office, and more. Built on hundreds of studies in the US, the UK, and around the world, and written with energy, wit, and sparkling intelligence, this is a groundbreaking, unforgettable exposé that will change the way you look at the world"--Publisher's description
+
+## 5. 
+
+## 6.多行命令执行
+&	无条件执行&后的命令	cmd1 & cmd2 即cmd1，cmd2都会执行
+&&	成功后执行	cmd1 && cmd2 即若cmd1执行成功则执行cmd2
+||	失败后执行	cmd1 || cmd2 即若cmd1执行失败则执行cmd2
+[
+](https://blog.csdn.net/qq_34159047/article/details/109734803)
+
+
+## 7.jupyter安装和虚拟环境配置，mito安装
+参考[https://zhuanlan.zhihu.com/p/81495199](https://zhuanlan.zhihu.com/p/81495199)
+参看[https://docs.trymito.io/getting-started/installing-mito](https://docs.trymito.io/getting-started/installing-mito)
+
+
+## 8.孔子处事理论
+格物致知 诚意正心 修身齐家 治国平天下
+格物：分门别类，区分事物
+致知：形成认知，举一反三
+诚意：带有热情，充满好奇探索
+正心：内心坚定，世俗不惑-----用心探索帮助世人的东西才是正道，遵循自己本心和热情去做事
+
+## 9.txt to excel
+**“懒人”小工具之txt自动化写入excel脚本**
+
+**工具简介**
+实现txt文件内容填入到excel文件中的自动化脚本，在攻防蓝队防守的时候需要将发送的告警通报数据整理到excel表格进行汇总，可以想象这是一份Ctrl+C和Ctrl+V的任务，当需要汇总的数据量较大的时候，需要投入的时间就比较长，且过程机械重复。由此书写了将通报数据自动化填入excel的脚本，减轻防守值班人员的重复性工作量。
+**适用场景**
+适用于txt文件存在固定的格式，需要将txt格式的内容填入表格的情况，如：蓝队防守告警通报数据用excel进行汇总。
+**使用方法**
+将数据整理到txt文件中，执行py脚本。需要根据当下情况进行py脚本微调，目前是将当前日期的txt文件写入excel中，如4月10日对应的txt文件名为0410.txt，也可以根据需要进行脚本调整。
+如下案例：
+1、将通报数据整理如下：
+![](https://cdn.nlark.com/yuque/0/2022/png/27194526/1650249956584-ec509d6b-5023-4685-aea7-020f2b747766.png#clientId=ueb1f8c46-a3bb-4&crop=0&crop=0&crop=1&crop=1&from=paste&id=u36ddf96b&margin=%5Bobject%20Object%5D&originHeight=274&originWidth=345&originalType=url&ratio=1&rotation=0&showTitle=false&status=done&style=none&taskId=ucfb69484-ec72-48df-80c2-40b851b36cc&title=)
+2、执行py脚本，得到如下excel文件：
+![](https://cdn.nlark.com/yuque/0/2022/png/27194526/1650249956590-1c7e46de-e7b0-4119-bfb4-751c97d8cfa5.png#clientId=ueb1f8c46-a3bb-4&crop=0&crop=0&crop=1&crop=1&from=paste&id=uc0d06c69&margin=%5Bobject%20Object%5D&originHeight=260&originWidth=686&originalType=url&ratio=1&rotation=0&showTitle=false&status=done&style=none&taskId=u7444444a-c741-422d-9777-ef431885bee&title=)
+通过该方法能够很大程度上减轻防守值班人员的重复性工作量。
+代码如下：
+```
+import xlwt
+import time
+ 
+# 将读取的数据写入到字典
+def read_txt(file):
+    result = []
+    dictt = {}
+    f = open(file, "r", encoding="utf-8")
+    lines = f.readlines()
+    a = 0
+    for line in lines: #以下写入字典情况，需要根据具体情况进行调整
+        a += 1
+        if a % 7 == 2:
+            dictt["time"] = line.split("：")[1][:-1]
+        elif a % 7 == 3:
+            dictt["src_ip"] = line.split("：")[1][:-1]
+        elif a % 7 == 4:
+            dictt["dst_ip"] = line.split("：")[1][:-1]
+        elif a % 7 == 5:
+            dictt["attack_type"] = line.split("：")[1][:-1]
+        elif a % 7 == 6:
+            dictt["chuzhi"] = line.split("：")[1][:-1]
+            result.append(dictt)
+            dictt = {}  # 因为每次添加的都是同一个内存到list中去了.dictt每次写入的时候改变了内存中的value,但是地址不变.即是,创建了一次内存空间,只会不断的改变value了,添加到list中的时候value已经改了。所以需要在for循环里面去每次循环都创建一个空的dict，以保证之前添加过的不会被改变。
+        else:
+            continue
+    return result
+ 
+# 将列表写入到excel表
+def write_exec(list):
+    workbook = xlwt.Workbook(encoding="utf-8", style_compression=0)
+    # Cell_overwirte_ok 是能够覆盖单元表格的意思。
+    sheet = workbook.add_sheet("2", cell_overwrite_ok=True)
+    for i in range(len(list)):  #以下写入表格的具体位置需要根据具体情况进行调整
+        if i+1 < 10:
+            num = '00' + str(i+1)
+        elif i+1 < 100:
+            num = '0' + str(i+1)
+        else: num = str(i+1)
+        sheet.write(i, 0, num)
+        sheet.write(i, 1, list[i]['time'])
+        sheet.write(i, 2, '/')
+        sheet.write(i, 3, list[i]['dst_ip'])
+        sheet.write(i, 4, list[i]['src_ip'])
+        sheet.write(i, 5, list[i]['attack_type'])
+        sheet.write(i, 6, list[i]['chuzhi'])
+        sheet.write(i, 7, '是') #默认填入'是'
+    workbook.save(r"./01-攻击事件汇总清单_{}.xls".format(time.strftime('%Y%m%d',time.localtime(time.time())))) #导出的excel文件名
+ 
+filename = time.strftime('%m%d',time.localtime(time.time())) #写入的txt文件名
+file = filename + '.txt' 
+dictt = read_txt(file)
+# print(dictt)
+write_exec(dictt)
+print('写入完成')
+```
+**注意事项**
+需要根据实际场景进行微调！
+
+## 10. 
+
+## 11. 
+
+## 12.谈谈对技术和管理的认识
+
+1. 技术包含两个方面，一个是行业趋势，一个是前沿技术现有解决方案。
+- 围绕万物互联，云计算，5G，AI，大数据各显其能，构建人们需要的线下安全世界和线上安全世界线上是前提，线下是延展（没有数据中心，中台节点和站点设备的线上安全，线下的安防就无从谈起）。
+- 现有解决方案，人防物防技防，从IAAS到PAAS，但是还没到SAAS，不能带给场景客户整个满意的体验，其中包含输出，处理，输入三个环节上的体验。
+   - 输出包含交付的产品，材料，培训，展会，各类形式的广告。
+   - 处理包含客户处理消化这些信息，资源过程中的感受，要素的硬性条件，快速部署可能，满足度，易用性，可靠性，可复制性等。
+   - 输入包含客户反馈信息和要素给到厂家，可以是需求，投诉，评论，退换货，付款方式。
+2. 管理同样包含两个方面，一个是对自己的管理，一个是对他人的管理。
+- 对自己的管理包含：
+   - 严于律己，高规格，严要求
+      - 400天的时间spanish作为工作语言
+      - 业务认知得到区总认可
+      - 每天学会一个美式幽默
+   - 任务拆分，分发
+      - SP BP拆分
+      - 订立OKR Objectives and key results，与员工达成目标共识，O的汇集是一个自下而上的过程，O的分解是个自上而下的过程。
+- 对他人的管理：
+   - 宽以待人，通感，善解人意，做关系，做自我营销，得到信赖
+   - 激励（给对方一个目标榜样），鼓励（人生精神和现实物质），变通（求同存异大禹治水），容忍（抓大放小），耐心沟通（善于倾听）
+   - 开放，让团队非常清晰知道自己的目标，相互清楚对方做得环节和进度，利用dingtalk之类的软件共享日报。
+
+## 13. 
+
+## 14. mount command
+![image.png](https://cdn.nlark.com/yuque/0/2022/png/27194526/1650878205167-c5aafe78-4f54-48ef-86a9-8b1035e3a843.png#clientId=u57b39014-c9e8-4&crop=0&crop=0&crop=1&crop=1&from=paste&height=467&id=u76b4d15b&margin=%5Bobject%20Object%5D&name=image.png&originHeight=467&originWidth=972&originalType=binary&ratio=1&rotation=0&showTitle=false&size=60342&status=done&style=none&taskId=u9d88442b-c1ff-4a76-99cc-13a96f99a5d&title=&width=972)
+
+## 15. docker Wiz note私有搭建方法
+```
+#换centos7 repo方法
+#注意repo的名称进行替换，不一定是dvd.repo
+cat /etc/centos-release
+curl -0 http://mirrors.163.com/centos/7/os/x86 64/Packages/wget-1.14-18.el7 6.1.x86 64.rpm
+ls
+rpm -ivh wget-1.14-18.el7 6.1.x86 64.rpm
+
+mv /etc/yum.repos.d/dvd.repo /etc/yum.repos.d/dvd.repo.backup
+wget -0 /etc/yum.repos.d/dvd.repo https://mirrors.aliyun.com/repo/Centos-7.repo
+yum makecache
+cat /etc/yum.repos.d/dvd.repo
+
+#install docker
+yum update
+yum install -y yum-utils device-mapper-persistent-data Ivm2
+
+yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
+
+yum install docker-ce -y
+#备注：默认安装最新的docker稳定版本。
+
+systemctl start docker
+systemctl enable docker
+docker version
+
+cd ~
+mkdir wizdata
+docker run --name wiz --restart=always -it -d -v  ~/wizdata:/wiz/storage -v  /etc/localtime:/etc/localtime -p 8848:80 -p 9269:9269/udp  wiznote/wizserver
+
+#默认管理员账号：admin@wiz.cn，密码：123456
+#以下为破解方法
+# 进入容器
+docker exec -it wiz bash
+# 编辑核心文件
+vi /wiz/app/wizserver/node_modules/node-rsa/src/NodeRSA.js
+
+#输入“/NodeRSA.prototype.decryptPublic”回车，找到破解位置，
+#替换NodeRSA.prototype.decryptPublic = function (buffer, encoding)方法
+EOF
+
+* Parameters same as `decrypt` method
+*/
+NodeRSA.prototype.decryptPublic = function (buffer, encoding) {
+    // return this.$decryptKey(true, buffer, encoding);
+    var data = this.$decryptKey(true, buffer, encoding);
+    try {
+        var v = JSON.parse(data);
+        if (v.count == 5) {
+            v.count = 999;
+            v.type = 'license_vip';
+            v.oem = '红叶';
+            data = Buffer.from(JSON.stringify(v));
+        }
+    } catch (e) {}
+    return data;
+};
+
+EOF
+exit
+docker restart wiz
+#此时会提示ngix错误，则需要替换以下文件
+
+# go to this link  https://www.kejiwanjia.com/jiaocheng/76664.html
+# upload script
+
+docker run --name wiz --restart=always -it -d -v  ~/wizdata:/wiz/storage -v  /etc/localtime:/etc/localtime -p 8848:80 -p 9269:9269/udp -v ~/wizdata/crack/NodeRSA.js:/wiz/app/wizserver/node_modules/node-rsa/src/NodeRSA.js:ro  wiznote/wizserver
+
+#接着登录admin账号admin@wiz.cn，密码：123456即可查看到破解成功
+```
+![image.png](https://cdn.nlark.com/yuque/0/2022/png/27194526/1650964435013-b3b1e26b-fce9-4cc0-bfec-b99f99cdfa9c.png#clientId=u6461a4cd-14b2-4&crop=0&crop=0&crop=1&crop=1&from=paste&height=488&id=ub6132b5f&margin=%5Bobject%20Object%5D&name=image.png&originHeight=732&originWidth=1622&originalType=binary&ratio=1&rotation=0&showTitle=false&size=125049&status=done&style=none&taskId=u4abcd9f1-9d84-421b-892e-70bf53daafe&title=&width=1081.3333333333333)
+![image.png](https://cdn.nlark.com/yuque/0/2022/png/27194526/1650963607623-8c227117-96df-4b50-a368-e3323b979db1.png#clientId=u6461a4cd-14b2-4&crop=0&crop=0&crop=1&crop=1&from=paste&height=324&id=u4a3f8738&margin=%5Bobject%20Object%5D&name=image.png&originHeight=486&originWidth=859&originalType=binary&ratio=1&rotation=0&showTitle=false&size=18755&status=done&style=none&taskId=uee46c362-36a4-4174-8653-d0f90cf83b2&title=&width=572.6666666666666)
+![image.png](https://cdn.nlark.com/yuque/0/2022/png/27194526/1650963552400-da76e1a6-2959-4540-85ea-1158b3a3ff65.png#clientId=u6461a4cd-14b2-4&crop=0&crop=0&crop=1&crop=1&from=paste&height=393&id=u09d1b596&margin=%5Bobject%20Object%5D&name=image.png&originHeight=590&originWidth=921&originalType=binary&ratio=1&rotation=0&showTitle=false&size=44010&status=done&style=none&taskId=u91f41b4e-8bfe-45cc-801f-7360b46d7f9&title=&width=614)
+
+
+## 16. pxe server installation
+```
+ddns-update-style interim;
+allow booting;#定义能够PXE启动
+allow bootp;#定义支持bootp
+next-server 10.50.36.203; #TFTP Server的IP地址
+filename "pxelinux.0";#bootstrap 文件(NBP)
+
+default-lease-time 1800;
+max-lease-time 7200;
+ping-check true;
+option domain-name-servers 10.50.36.203;
+
+subnet 192.168.0.0 netmask 255.255.255.0
+{
+range 10.50.36.203 10.50.36.250;
+option routers 10.50.36.1;
+option broadcast-address 10.50.36.255;
+}
+
+ddns-update-style interim;
+allow booting;
+#定义能够PXE启动
+allow bootp;
+#定义支持bootp
+next-server 10.50.36.203;
+#TFTP Server的IP地址
+filename "pxelinux.0";
+
+default-lease-time 1800;
+max-lease-time 7200;
+ping-check true;
+option domain-name-servers 10.50.36.1;
+
+subnet 10.50.36.0 netmask 255.255.255.0
+{
+range 10.50.36.203 10.50.36.250;
+option routers 10.50.36.1;
+option broadcast-address 10.50.36.255;
+}
+    
+
+
+default linux# 默认启动的是 'label linux' 中标记的启动内核
+prompt 1     # 显示 'boot: ' 提示符
+timeout 60      # 等待超时时间，单位为 1/10 秒,超时后自动启动 默认指定的label     
+display boot.msg# 显示boot.msg的内容，文件路径是相对tftp server 的根目录(默认 /tftpboot),所以boot.msg文件绝对路径在 /tftpboot/boot.msg .
+F1 boot.msg  # 按下'F1' 键后显示的文件
+F2 options.msg
+F3 general.msg
+F4 param.msg
+F5 rescue.msg
+
+label  1# 'label' 指定你在 'boot:' 提示符下输入的关键字。
+kernel linux/rh44-x86-32/vmlinuz
+append initrd=linux/rh44-x86-32/initrd.img ramdisk_size=8192  ks=http://install.test.com/conf/ks_module.cfg ksdevice=link 
+
+label  2
+kernel linux/rh44-x86-64/vmlinuz
+append initrd=linux/rh44-x86-64/initrd.img ramdisk_size=8192  ks=http://install.test.com/conf/ks_module.cfg ksdevice=link
+
+label  3
+kernel linux/rh46-x86-64/vmlinuz
+append initrd=linux/rh46-x86-64/initrd.img ramdisk_size=8192  ks=http://install.test.com/conf/ks_module.cfg ksdevice=link 
+
+label  4
+kernel linux/rh46-x86-32/vmlinuz
+append initrd=linux/rh46-x86-32/initrd.img ramdisk_size=8192  ks=http://install.test.com/conf/ks_module.cfg ksdevice=link 
+
+label  5 
+kernel image/linux/rh38-x86-32/vmlinuz
+append initrd=image/linux/rh38-x86-32/initrd.img ramdisk_size=8192  ks=http://install.test.com/conf/ks_module.cfg ksdevice=link 
+
+label  6
+kernel linux/rh38-x86-64/vmlinuz
+append initrd=linux/rh38-x86-64/initrd.img ramdisk_size=8192  ks=http://install.test.com/conf/ks_module.cfg ksdevice=link 
+
+
+
+default linux
+prompt 0
+timeout 600
+ONTIMEOUT local
+display boot.msg
+
+menu title ########## PXE Boot Menu ##########
+
+label linux
+ menu label ^1) Install CentOS 7 x64 with HTTP
+kernel centos7/vmlinuz
+append initrd=centos7/initrd.img method=http://10.50.36.203/centos7 devfs=nomount
+
+```
+```
+#临时测试：
+systemctl stop firewalld
+systemctl stop libvirtd
+setenforce 0
+
+#准备本地yum源
+mkdir -pv /dvd
+mount /dev/cdrom  /dvd
+chmod +x /etc/rc.d/rc.local
+grep dvd  /etc/rc.d/rc.local || echo  'mount  /dev/cdrom  /dvd' > /etc/rc.d/rc.local
+source  /etc/rc.d/rc.local
+cd /etc/yum.repos.d
+mkdir -pv bak/
+mv -v *.repo bak/
+
+
+cat > dvd.repo <<EOF
+[centos7]
+name=centos linux 7-ali
+baseurl=http://mirrors.aliyun.com/centos/7/centosplus/x86_64/
+enabled=1
+gpgcheck=0
+
+EOF
+
+
+
+yum clean all
+yum repolist
+yum install -y vsftpd
+mkdir  -pv  /var/ftp/ks/
+
+
+
+yum install vsftpd dnsmasq curl tftp-server xinetd syslinux mlocate -y
+mkdir -pv /var/ftp/ks/
+mkdir -v /var/lib/tftpboot/pxelinux.cfg /var/lib/tftpboot/centos7/ /var/ftp/dvd/
+systemctlrestart vsftpd
+mount/dev/cdrom /var/ftp/dvd
+
+updatedb
+locate pxelinux.0
+cp -v /usr/share/syslinux/pxelinux.0 /var/lib/tftpboot/
+
+
+cp -v /usr/share/syslinux/menu.c32 /var/lib/tftpboot/
+    
+touch /var/lib/tftpboot/pxelinux.cfg/default
+
+
+default menu.c32
+prompt 0
+timeout 300
+ONTIMEOUT local
+
+menu title ##########   PXE Boot Menu ##########
+
+label 1
+menu label ^1)InstallCentOS7 x64 withLocalRepo
+kernel   centos7/vmlinuz
+append initrd=centos7/initrd.img method=ftp://192.168.10.7/dvd devfs=nomount
+#ks=ftp://192.168.10.7/ks/7text.ks
+
+label 2
+menu label ^2)InstallCentOS7 x64 with http://mirror.centos.org Repo
+kernel   centos7/vmlinuz
+append initrd=centos7/initrd.img method=http://mirror.centos.org/centos/7/os/x86_64/ devfs=nomount ip=dhcp
+
+label 3
+menu label ^3)InstallCentOS7 x64 withLocalRepousing VNC
+kernel   centos7/vmlinuz
+append initrd=centos7/initrd.img method=ftp://192.168.10.7/pub devfs=nomount inst.vnc inst.vncpassword=password
+
+label 4
+menu label ^4)Bootfromlocal   drive
+
+
+
+cat /var/lib/tftpboot/pxelinux.cfg/default
+
+测试dnsmasq手动启动(已测OK)：
+netstat -atunlp|grep dnsmasq
+systemctl stop libvirtd
+systemctl stop dnsmasq
+pkill -9  dnsmasq
+dnsmasq --interface=ens33 --dhcp-range=192.168.10.100,192.168.10.150 --dhcp-boot=pxelinux.0 --enable-tftp --tftp-root=/var/lib/tftpboot/
+
+dnsmasq -i ens33 -F 192.168.10.100,192.168.10.150 -M pxelinux.0  --enable-tftp --tftp-root=/var/lib/tftpboot/
+
+#以上的临时测试完毕(已测OK)
+-----------------------------------------------------------------------
+#正式编写dnsmasq自动部署pxe服务器的脚本
+
+vi  dnsmasq.sh  脚本代码如下
+#!/bin/bash
+setenforce  0
+getenforce
+sed -i  '/^SELINUX=/c\SELINUX=disable'  /etc/selinux/config
+grep  ^SELINUX  /etc/selinux/config
+
+systemctl  stop  firewalld
+systemctl  disable  firewalld
+systemctl  stop  libvirtd
+systemctl  disable  libvirtd
+
+read -p  'selinux和firewalld已关闭,按回车键继续配置本地yum源...'
+
+#准备本地yum源
+mkdir -pv /dvd
+mount  /dev/cdrom  /dvd
+chmod +x /etc/rc.d/rc.local
+grep dvd  /etc/rc.d/rc.local || echo  'mount  /dev/cdrom  /dvd' > /etc/rc.d/rc.local
+source  /etc/rc.d/rc.local
+cd /etc/yum.repos.d
+mkdir -pv bak/
+mv -v *.repo bak/
+cat > dvd.repo <<EOF
+[centos73]
+name=centos linux 7.3 local
+baseurl=file:///dvd
+enabled=1
+gpgcheck=0
+
+EOF
+yum clean all
+yum repolist
+mkdir  -pv  /var/ftp/ks/
+
+yum install -y dnsmasq vsftpd curl tftp-server xinetd
+
+cp -v /etc/dnsmasq.conf /etc/dnsmasq.conf.bak
+grep -Ev '^#|^$' /etc/dnsmasq.conf
+cat  >/etc/dnsmasq.d/dhcp.conf <<EOF
+#接口设置，在94行
+interface=ens33,lo
+#监听IP地址,在99行
+#listen-address=192.168.10.7
+#绑定接口,在112行
+#bind-interfaces
+#域名,#在132行
+domain=sky.com
+# DHCP range-leases,dhcp租约信息,在145行
+dhcp-range= ens33,192.168.10.100,192.168.10.200,255.255.255.0,1h
+#ip和mac地址绑定
+#dhcp-host=aa:bb:cc:dd:ee:ff,192.168.111.50
+# PXE启动文件和tftp服务器ip地址,在418行
+dhcp-boot=pxelinux.0,pxeserver,192.168.10.7  
+# Gateway网关,在312行
+dhcp-option=3,192.168.10.1
+# DNS服务器IP地址
+dhcp-option=6,114.114.114.114,8.8.8.8
+server=8.8.4.4
+# Broadcast Address广播地址
+dhcp-option=28,192.168.10.255
+# NTP Server网络时间服务器IP地址,
+dhcp-option=42,0.0.0.0
+#pxe启动时的命令提示,在448行
+pxe-prompt="Press F8 for menu.", 5
+#pxe服务,在458行
+pxe-service=x86PC,"Install CentOS 7 from network server 192.168.10.7", pxelinux
+#启用tftp服务,在473行
+enable-tftp
+#tftp文件共享的根目录，在476行
+tftp-root=/var/lib/tftpboot
+
+EOF
+
+grep -Ev '^#|^$' /etc/dnsmasq.d/dhcp.conf
+
+yum install -y syslinux mlocate
+yum install -y tftp-server xinetd
+ls /usr/share/syslinux
+updatedb
+locate  pxelinux.0
+cp -v /usr/share/syslinux/pxelinux.0 /var/lib/tftpboot/
+
+mkdir   /var/lib/tftpboot/pxelinux.cfg
+touch   /var/lib/tftpboot/pxelinux.cfg/default
+
+cat > /var/lib/tftpboot/pxelinux.cfg/default <<EOF
+default menu.c32
+prompt 0
+timeout 15
+ONTIMEOUT local
+
+menu title ##########   PXE Boot Menu ##########
+
+label 1
+menu label ^1)InstallCentOS7 x64 withLocalRepo
+menu default
+kernel   centos7/vmlinuz
+append initrd=centos7/initrd.img method=ftp://192.168.10.7/dvd devfs=nomount
+#ks=ftp://192.168.10.7/ks/7text.ks
+
+label 2
+menu label ^2)InstallCentOS7 x64 with http://mirror.centos.org Repo
+kernel   centos7/vmlinuz
+append initrd=centos7/initrd.img method=http://mirror.centos.org/centos/7/os/x86_64/ devfs=nomount ip=dhcp
+
+label 3
+menu label ^3)InstallCentOS7 x64 withLocalRepousing VNC
+kernel   centos7/vmlinuz
+append initrd=centos7/initrd.img method=ftp://192.168.10.7/dvd devfs=nomount inst.vnc inst.vncpassword=password
+
+label 4
+menu label ^4)Bootfromlocal   drive
+EOF
+
+cat /var/lib/tftpboot/pxelinux.cfg/default
+mkdir -v /var/lib/tftpboot/centos7/
+
+cp -v /dvd/isolinux/* /var/lib/tftpboot/centos7/
+
+pkill -9 dnsmasq
+systemctl restart dnsmasq
+systemctl restart vsftpd
+systemctl status dnsmasq
+systemctl status vsftpd
+systemctl enable dnsmasq
+systemctl enable vsftpd
+netstat -atunlp|grep dnsmasq
+
+
+```
+## 17.centos搭建为NAS服务器
+```
+yum install samba -y
+adduser test
+passwd test
+test123
+test123
+
+smbpasswd –a test
+#(必须加-a)，密码可与系统用户不同。如果不增加用户到samba中，到输入密码的地方过不去。
+vi /etc/samba/smb.conf 
+
+#在结尾增加如下内容:
+[share]
+path = /media/samba
+valid users = test
+browseable = yes
+public = yes
+writable =yes
+write list = test
+available = yes
+read only = no
+
+systemctl stop firewalld
+#(这是临时关闭，重启系统后防火墙自动启动。 按第八步加samba端口就不用关闭防火墙了。
+
+chmod 777 /media/samba
+如果在“自动挂载”步骤已设，忽略此步。
+
+firewall-cmd –-zone=public –-add-port=445/tcp –permanent
+
+vi /etc/selinux/config
+SELINUX=enforcing 改为SELINUX=disabled
+systemctl restart smb
+systemctl reload smb
+
+#在资源管理器（不是浏览器）内输： \\192.168.1.199\share 或者  \\192.168.1.199
+```
+## 18.cmd合并txt
+方法一：  cmd中直接输入  type *.txt >>D:\merge.txt
+方法二：bat文件中输出 copy  *.txt  a.txt
+## 19.cmd输出文件夹名字
+dir /t /b >1.txt 

@@ -1,0 +1,116 @@
+# 2020-03-02-yum源介绍与配置
+---
+## 1.yum源介绍
+---
+1、yum是什么，yum源又是什么
+
+在windows上安装一个软件，我们可以通过360管家。因为360管家提供了软件的安装，卸载，并且解决了软件之间的依赖等相关问题，使得我们能够一键安装。在linux上有一个提供了和360管家类似功能的工具，叫做yum。使用yum我们就可以做到一个命令安装软件，并且不同的发行linux有不同工具，例如红帽（read hat）linux就使用的rpm全称就是read hat package manager 红帽软件包管理工具。
+
+yum源是什么呢？我们安装软件的时候需要下载软件，将很多软件放在一起就是源。软件安装包的来源。所以yum源就是软件安装包来源。如果我们是在线的，他会在网上给你下载安装包，如果是离线的没有网络。那么就只能配置本地的yum源了。
+
+2、本地yum源是什么呢？
+
+上面说过yum源就是软件安装包的来源，但是这些安装包哪里有呢？其实在linux的安装镜像中就有的，linux已经将常见的安装包放到了linux镜像中。如果你使用压缩文件打开linux的iso镜像文件，你会发现在根目录下有个文件夹：packages
+
+![https://bbs.dbappsecurity.com.cn/oss/image/3b523b66529f77dcccd1b7d542f194aa.png](https://bbs.dbappsecurity.com.cn/oss/image/3b523b66529f77dcccd1b7d542f194aa.png)
+
+上图就是使用压缩软件打开的系统盘内部情况，比如我们常用的工具vim，就是在这里面的。所以说：系统的安装镜像就可以当作yum源。
+
+3、与yum源相关的配置文件
+
+![https://bbs.dbappsecurity.com.cn/oss/image/f58a4b1ebe3196797d1f55fab0f5c74e.png](https://bbs.dbappsecurity.com.cn/oss/image/f58a4b1ebe3196797d1f55fab0f5c74e.png)
+
+上图就是yun源相关的配置，在路径/etc/yum.repos.d/目录下，一共4个文件，说下两个常用的。
+
+CentOS-Base.repo：有网的环境下默认使用这个，这个是第一优先级。因为没网，所以修改文件名，设置成备份文件。这样系统就会使用第二优先级的文件。
+
+CentOS-Media.repo：没网的环境下使用这个，在上图中会发现他默认配置了4个路径，第4个yumsource是我自己加的。意思是说，如果系统检测yum使用了离线安装，那么会从上到下从这4个路径中查找安装软件。所以我们只要把光盘挂载在这四个目录下的任意一个目录即可。同时，该配置文件默认是不启用的，如果想使用需要修改倒数第二行的enabled为1，否则该文件无效。
+
+
+
+## 2.yum源配置-对Centos7 精简版系统来说
+---
+### 方法一(最常见)
+---
+*在这里找wget的rpm包*
+
+[http://mirrors.163.com/centos/7/os/x86_64/Packages/](http://mirrors.163.com/centos/7/os/x86_64/Packages/)
+
+然后使用curl -O http下载或者下载后再winscp上传
+
+```jsx
+curl -O http://mirrors.163.com/centos/7/os/x86_64/Packages/wget-1.14-18.el7_6.1.x86_64.rpm
+```
+
+*RPM 包安装*
+
+安装 RPM 的命令格式为：
+
+[root@localhost ~]# rpm -ivh 包全名
+
+注意一定是包全名。涉及到包全名的命令，一定要注意路径，可能软件包在光盘中，因此需提前做好设备的挂载工作。
+
+此命令中各选项参数的含义为：
+
+- i：安装（install）;
+- v：显示更详细的信息（verbose）;
+- h：打印 #，显示安装进度（hash）;
+
+
+
+*使用wget拉centos7的yum源*
+```BASH
+#换centos7 repo方法
+#注意下文中repo的名称需要进行替换，不一定是dvd.repo
+#注意这个curl后面的url也并非不变的，需要用的时候到浏览器中查看下链接是否还存在，不存在就到上一级目录查找类似的rpm包
+cat /etc/centos-release
+curl -O http://mirrors.163.com/centos/7/os/x86_64/Packages/wget-1.14-18.el7_6.1.x86_64.rpm
+
+ls
+rpm -ivh wget-1.14-18.el7_6.1.x86_64.rpm
+
+mv /etc/yum.repos.d/dvd.repo /etc/yum.repos.d/dvd.repo.backup
+wget -O /etc/yum.repos.d/dvd.repo https://mirrors.aliyun.com/repo/Centos-7.repo
+yum makecache
+cat /etc/yum.repos.d/dvd.repo
+
+```
+
+
+---
+### 方法二(最懒人)使用本地ISO作为yum源
+---
+```bash
+#传iso镜像到tmp目录下,local为挂载点
+mkdir /tmp/local
+cd /tmp/
+#CentOS-7-x86_64-Everything-2009.iso为实际上传的ISO名称
+mount -o loop CentOS-7-x86_64-Everything-2009.iso /tmp/local/
+df -Th
+
+mkdir /etc/yum.repos.d/history
+mv /etc/yum.repos.d/* -t /etc/yum.repos.d/history
+vi /etc/yum.repos.d/local.repo
+
+#修改成如下内容
+[local]
+name=local
+# baseurl就是挂载路径
+baseurl=file:///tmp/local
+# enabled的值为1表示启用该yum源
+enabled=1
+#本地挂载不涉及数字签名问题，将gpgcheck值设置为0，表示不检查数字签名
+gpgcheck=0
+# gpgkey的值可以进到挂载路径下进行查看，我这里看到的是RPM-GPG-KEY-CentOS-7。
+gpgkey=file:///tmp/local/RPM-GPG-KEY-CentOS-7
+
+yum clean all
+yum makecache
+yum install -y ntp vim
+```
+
+
+
+## 3.yum源配置-对Centos8系统来说
+---
+参考以上两个方法，把里面的iso与rpm包下载路径都改为centos8的即可。

@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>2022-03-05-为知笔记私有化部署懒人脚本 &mdash; Novak V1.0 documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="2022-03-28-github pages+sphinx搭建线上博客" href="2022-03-28-github%20pages%2Bsphinx%E6%90%AD%E5%BB%BA%E7%BA%BF%E4%B8%8A%E5%8D%9A%E5%AE%A2.html" />
+    <link rel="prev" title="2020-03-02-yum源介绍与配置" href="2020-03-02-yum%E6%BA%90%E4%BB%8B%E7%BB%8D%E4%B8%8E%E9%85%8D%E7%BD%AE.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../index.html" class="icon icon-home"> Novak
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">关于我/About me</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../%E5%85%B3%E4%BA%8E%E6%88%91/Untitled%207ff75652d41b455bb87d95f6e47fe6a2.html"><strong>Novak Ho(Jiahang He)</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../%E5%85%B3%E4%BA%8E%E6%88%91/%E4%BD%95%E4%BD%B3%E6%9D%AD%20Novak%20Ho%20ccd9cec4d0024bbfaed1953e32acbeae.html">何佳杭 Novak Ho</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">我的观点</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../%E6%88%91%E7%9A%84%E8%A7%82%E7%82%B9/2022-04-29-techmanager-2022.html">2022-05-06-技术主管视角看世界</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">技术wiki</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="2020-03-02-yum%E6%BA%90%E4%BB%8B%E7%BB%8D%E4%B8%8E%E9%85%8D%E7%BD%AE.html">2020-03-02-yum源介绍与配置</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">2022-03-05-为知笔记私有化部署懒人脚本</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id2">懒人脚本</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="2022-03-28-github%20pages%2Bsphinx%E6%90%AD%E5%BB%BA%E7%BA%BF%E4%B8%8A%E5%8D%9A%E5%AE%A2.html">2022-03-28-github pages+sphinx搭建线上博客</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2022-03-28-markdown%E8%AF%AD%E6%B3%95%E8%A7%84%E5%88%99%E6%80%BB%E7%BB%93.html">2022-03-28-markdown语法规则总结</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2022-04-28-git%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95.html">2022-04-28-git使用方法</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2022-04-28-scoop%E5%BF%AB%E9%80%9F%E5%AE%89%E8%A3%85%E5%BA%94%E7%94%A8.html">2022-04-28-scoop快速安装应用</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2022-05-05-Code-FAQ%E6%B1%87%E6%80%BB.html">2022-05-05-Code-FAQ汇总</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2022-05-06-%E4%BD%9C%E4%B8%BA%E4%B8%80%E5%90%8D%E6%9E%81%E5%AE%A2%E6%96%B0%E7%94%B5%E8%84%91%E5%88%B0%E6%89%8B%E5%BA%94%E8%AF%A5%E5%81%9A%E4%BB%80%E4%B9%88.html">2022-05-06作为一名极客新电脑到手应该做什么</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2022-05-06-%E7%AE%A1%E7%90%86%E5%B9%B6%E6%9B%B4%E6%96%B0%E7%BA%BF%E4%B8%8A%E5%8D%9A%E5%AE%A2%E7%9A%84%E6%96%B9%E6%B3%95.html">2022-05-06-管理并更新线上博客的方法</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">English_Essay</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../English_Essay/2022-04-26-The-world-is-not-fair.html">The world is not fair</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../English_Essay/2022-04-27-Are-you-too-tired.html">A poem to motivate yourself</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Novak</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>2022-03-05-为知笔记私有化部署懒人脚本</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/doc/技术wiki/2022-03-05-为知笔记私有化部署懒人脚本.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="id1">
+<h1>2022-03-05-为知笔记私有化部署懒人脚本<a class="headerlink" href="#id1" title="Permalink to this headline"></a></h1>
+<hr class="docutils" />
+<p>准备一台centos服务器，执行如下脚本</p>
+<section id="id2">
+<h2>懒人脚本<a class="headerlink" href="#id2" title="Permalink to this headline"></a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>#换centos7 repo方法
+#注意repo的名称进行替换，不一定是dvd.repo
+cat /etc/centos-release
+curl -0 http://mirrors.163.com/centos/7/os/x86 64/Packages/wget-1.14-18.el7 6.1.x86 64.rpm
+ls
+rpm -ivh wget-1.14-18.el7 6.1.x86 64.rpm
+
+mv /etc/yum.repos.d/dvd.repo /etc/yum.repos.d/dvd.repo.backup
+wget -0 /etc/yum.repos.d/dvd.repo https://mirrors.aliyun.com/repo/Centos-7.repo
+yum makecache
+cat /etc/yum.repos.d/dvd.repo
+
+#install docker
+yum update
+yum install -y yum-utils device-mapper-persistent-data Ivm2
+
+yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
+
+yum install docker-ce -y
+#备注：默认安装最新的docker稳定版本。
+
+systemctl start docker
+systemctl enable docker
+docker version
+
+cd ~
+mkdir wizdata
+docker run --name wiz --restart=always -it -d -v  ~/wizdata:/wiz/storage -v  /etc/localtime:/etc/localtime -p 8848:80 -p 9269:9269/udp  wiznote/wizserver
+
+#默认管理员账号：admin@wiz.cn，密码：123456
+#以下为破解方法
+# 进入容器
+docker exec -it wiz bash
+# 编辑核心文件
+vi /wiz/app/wizserver/node_modules/node-rsa/src/NodeRSA.js
+
+#输入“/NodeRSA.prototype.decryptPublic”回车，找到破解位置，
+#替换NodeRSA.prototype.decryptPublic = function (buffer, encoding)方法
+EOF
+
+* Parameters same as `decrypt` method
+*/
+NodeRSA.prototype.decryptPublic = function (buffer, encoding) {
+    // return this.$decryptKey(true, buffer, encoding);
+    var data = this.$decryptKey(true, buffer, encoding);
+    try {
+        var v = JSON.parse(data);
+        if (v.count == 5) {
+            v.count = 999;
+            v.type = &#39;license_vip&#39;;
+            v.oem = &#39;红叶&#39;;
+            data = Buffer.from(JSON.stringify(v));
+        }
+    } catch (e) {}
+    return data;
+};
+
+EOF
+exit
+docker restart wiz
+#此时会提示ngix错误，则需要替换以下文件
+
+# go to this link  https://www.kejiwanjia.com/jiaocheng/76664.html  下载到~/wizdata/crack文件夹中
+# upload script
+
+docker run --name wiz --restart=always -it -d -v  ~/wizdata:/wiz/storage -v  /etc/localtime:/etc/localtime -p 8848:80 -p 9269:9269/udp -v ~/wizdata/crack/NodeRSA.js:/wiz/app/wizserver/node_modules/node-rsa/src/NodeRSA.js:ro  wiznote/wizserver
+
+#接着登录admin账号admin@wiz.cn，密码：123456即可查看到破解成功,使用许可菜单中许可用户数999，到期时间2119年
+</pre></div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="2020-03-02-yum%E6%BA%90%E4%BB%8B%E7%BB%8D%E4%B8%8E%E9%85%8D%E7%BD%AE.html" class="btn btn-neutral float-left" title="2020-03-02-yum源介绍与配置" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="2022-03-28-github%20pages%2Bsphinx%E6%90%AD%E5%BB%BA%E7%BA%BF%E4%B8%8A%E5%8D%9A%E5%AE%A2.html" class="btn btn-neutral float-right" title="2022-03-28-github pages+sphinx搭建线上博客" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, Novak Ho.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

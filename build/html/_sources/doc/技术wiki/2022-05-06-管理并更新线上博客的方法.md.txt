@@ -2,20 +2,25 @@
 ---
 ## 配置过程
 ```
-#打开cmd窗口A
+#1. 打开cmd窗口A
 d: & cd D:\90project\docs\source\doc\技术wiki
 #编写md文档
+
+
+#2.制作html并复制到目标文件夹
 cd D:\90project\docs\
 make clean & make html
-cp -r build/html/* docs/
+xcopy build\html\* docs\ /E/H/C/I/F
+A
 
-#打开另一个cmd窗口B
+#3.打开另一个cmd窗口B
 d: & cd D:\90project\docs\
 sphinx-autobuild . _build/html
-#查看本地效果，不满意返回修改
 
-#推送文档到github
-打开docs文件夹
+#查看本地效果，不满意返回修改
+#4.推送文档到github，打开gitbash
+d:
+cd D:\90project\docs\
 git init
 git add *
 git commit -m "10th"
