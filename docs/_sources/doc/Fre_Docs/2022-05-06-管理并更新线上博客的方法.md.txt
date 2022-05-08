@@ -8,6 +8,7 @@ D:\90project\docs\source\doc\技术wiki
 
 #2.打开cmd窗口A，制作html并复制到目标文件夹
 d: & cd D:\90project\docs\
+conda activate p397
 make clean & make html
 xcopy build\html\* docs\ /E/H/C/I/F
 A
@@ -17,10 +18,9 @@ sphinx-autobuild source build/html
 #3.查看本地效果，不满意返回步骤1修改
 
 
-#4.推送文档到github，打开gitbash
-d:
-cd D:\90project\docs\
-git init
+#4.用gitbash推送文档到github，打开gitbash
+cd d:/90project/docs
+# git init
 git add *
 git commit -m "10th"
 git remote rm origin

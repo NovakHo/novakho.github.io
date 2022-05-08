@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>2022-05-06-管理并更新线上博客的方法 &mdash; 敬畏天地 终身学习            Go play with what I have V1.0 documentation</title>
+  <title>2022-05-06-管理并更新线上博客的方法 &mdash; 上敬畏天地知天命  下终身学习尽人事 / Go play with what I have V1.0 documentation</title>
       <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
@@ -26,7 +26,7 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="../../index.html" class="icon icon-home"> 敬畏天地 终身学习            Go play with what I have
+            <a href="../../index.html" class="icon icon-home"> 上敬畏天地知天命  下终身学习尽人事 / Go play with what I have
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
@@ -55,7 +55,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../%E6%8A%80%E6%9C%AFwiki/2022-03-28-markdown%E8%AF%AD%E6%B3%95%E8%A7%84%E5%88%99%E6%80%BB%E7%BB%93.html">2022-03-28-markdown语法规则总结</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../%E6%8A%80%E6%9C%AFwiki/2022-04-28-git%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95.html">2022-04-28-git使用方法</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../%E6%8A%80%E6%9C%AFwiki/2022-04-28-scoop%E5%BF%AB%E9%80%9F%E5%AE%89%E8%A3%85%E5%BA%94%E7%94%A8.html">2022-04-28-scoop快速安装应用</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../%E6%8A%80%E6%9C%AFwiki/2022-05-05-Code-FAQ%E6%B1%87%E6%80%BB.html">2022-05-05-技术学习FAQ汇总</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../%E6%8A%80%E6%9C%AFwiki/2022-05-05-%E6%8A%80%E6%9C%AF%E5%AD%A6%E4%B9%A0FAQ%E6%B1%87%E6%80%BB.html">2022-05-05-技术学习FAQ汇总</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../%E6%8A%80%E6%9C%AFwiki/2022-05-06-%E4%BD%9C%E4%B8%BA%E4%B8%80%E5%90%8D%E6%9E%81%E5%AE%A2%E6%96%B0%E7%94%B5%E8%84%91%E5%88%B0%E6%89%8B%E5%BA%94%E8%AF%A5%E5%81%9A%E4%BB%80%E4%B9%88.html">2022-05-06作为一名极客新电脑到手应该做什么</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">English_Essay</span></p>
@@ -77,7 +77,7 @@
 
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../../index.html">敬畏天地 终身学习            Go play with what I have</a>
+          <a href="../../index.html">上敬畏天地知天命  下终身学习尽人事 / Go play with what I have</a>
       </nav>
 
       <div class="wy-nav-content">
@@ -106,6 +106,7 @@
 
 <span class="c1">#2.打开cmd窗口A，制作html并复制到目标文件夹</span>
 <span class="n">d</span><span class="p">:</span> <span class="o">&amp;</span> <span class="n">cd</span> <span class="n">D</span><span class="p">:</span>\<span class="mi">90</span><span class="n">project</span>\<span class="n">docs</span>\
+<span class="n">conda</span> <span class="n">activate</span> <span class="n">p397</span>
 <span class="n">make</span> <span class="n">clean</span> <span class="o">&amp;</span> <span class="n">make</span> <span class="n">html</span>
 <span class="n">xcopy</span> <span class="n">build</span>\<span class="n">html</span>\<span class="o">*</span> <span class="n">docs</span>\ <span class="o">/</span><span class="n">E</span><span class="o">/</span><span class="n">H</span><span class="o">/</span><span class="n">C</span><span class="o">/</span><span class="n">I</span><span class="o">/</span><span class="n">F</span>
 <span class="n">A</span>
@@ -115,10 +116,9 @@
 <span class="c1">#3.查看本地效果，不满意返回步骤1修改</span>
 
 
-<span class="c1">#4.推送文档到github，打开gitbash</span>
-<span class="n">d</span><span class="p">:</span>
-<span class="n">cd</span> <span class="n">D</span><span class="p">:</span>\<span class="mi">90</span><span class="n">project</span>\<span class="n">docs</span>\
-<span class="n">git</span> <span class="n">init</span>
+<span class="c1">#4.用gitbash推送文档到github，打开gitbash</span>
+<span class="n">cd</span> <span class="n">d</span><span class="p">:</span><span class="o">/</span><span class="mi">90</span><span class="n">project</span><span class="o">/</span><span class="n">docs</span>
+<span class="c1"># git init</span>
 <span class="n">git</span> <span class="n">add</span> <span class="o">*</span>
 <span class="n">git</span> <span class="n">commit</span> <span class="o">-</span><span class="n">m</span> <span class="s2">&quot;10th&quot;</span>
 <span class="n">git</span> <span class="n">remote</span> <span class="n">rm</span> <span class="n">origin</span>
