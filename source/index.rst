@@ -6,12 +6,7 @@
 Welcome to Novak's documentation!
 =================================
 
-.. toctree::
-   :maxdepth: 3
-   :caption: 关于我/About me
-   :glob:
 
-   doc/关于我/*
 
 .. toctree::
    :maxdepth: 3
